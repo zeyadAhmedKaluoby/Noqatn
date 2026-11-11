@@ -26,6 +26,7 @@ export type OpeningKind =
   | "confetti"
   | "poster"
   | "wax"
+  | "rosegate"
   | "bow"
   | "watercolor"
   | "bismillah"
@@ -296,6 +297,26 @@ export const TEMPLATES: TemplateDef[] = [
       petal: "#f4efe6",
       button: "#e6b325",
       buttonText: "#16130c",
+    },
+  },
+  {
+    key: "rose-gate",
+    name: "باب الورد",
+    brief: "ورق بلون الورد وبوابة زهر. الحكاية تنزل من الباب للبرنامج والقاعة والدعاء.",
+    eventTypes: ["WEDDING"],
+    opening: "rosegate",
+    decoration: "none",
+    colors: {
+      bg: "#fbf7f4",
+      ink: "#7a4e55",
+      gold: "#c2a267",
+      muted: "#8a5e64",
+      card: "#fffdfb",
+      accent: "#7a6992",
+      stage: "#efe6e2",
+      petal: "#f4dee0",
+      button: "#7a4e55",
+      buttonText: "#fbf7f4",
     },
   },
   {

@@ -8,6 +8,7 @@ import { GiftForm, MessageForm, RsvpForm } from "@/components/invitation/forms";
 import { InvitePhoto } from "@/components/invitation/photo";
 import { PosterMasthead } from "@/components/invitation/poster";
 import { invitationTemplates } from "@/components/invitation/openings";
+import { RoseStory } from "@/components/invitation/rose-story";
 import { WaxStory } from "@/components/invitation/wax-story";
 import { displayNames, formatArabicDate, formatNumber, formatTime } from "@/lib/format";
 import { startSong } from "@/lib/music";
@@ -60,6 +61,7 @@ export function InvitationView({
     if (music.current || !event.design.music) return;
     try {
       const handle = startSong(getSong(event.design.song, event.type).src);
+      handle.setMuted(muted);
       music.current = handle;
       void handle.ready.catch(() => setAudioFailed(true));
     } catch {
@@ -77,6 +79,26 @@ export function InvitationView({
   }
 
   const showDecor = phase !== "closed" && event.design.animationLevel !== "NONE" && template.decoration !== "none";
+
+  if (template.key === "rose-gate") {
+    return (
+      <div className="min-h-svh md:px-4 md:py-6" style={{ background: template.colors.stage }}>
+        <article
+          className="invitation rose-story mx-auto w-full max-w-[480px] overflow-x-clip bg-[#fbf7f4] md:min-h-[calc(100svh-3rem)] md:rounded-[2rem] md:shadow-[0_30px_80px_rgba(80,40,40,0.12)]"
+          style={themeVars(template)}
+          onPointerDown={startMusic}
+        >
+          <RoseStory event={event} />
+        </article>
+        {event.design.music && !audioFailed && (
+          <button type="button" className="audio-fab" aria-pressed={muted} onClick={() => setMuted((value) => !value)}>
+            {muted ? "تشغيل الأغنية" : "كتم الأغنية"}
+            <span className="font-normal"> · {getSong(event.design.song, event.type).title}</span>
+          </button>
+        )}
+      </div>
+    );
+  }
 
   if (template.key === "wax-roses") {
     return (

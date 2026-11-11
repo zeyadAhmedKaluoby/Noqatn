@@ -78,7 +78,72 @@ function draw(kind: OpeningKind, face: Face, names: string, date: string, kicker
   if (kind === "moon") return face === "a" ? <MoonDoor /> : <Terrace names={names} />;
   if (kind === "ringbox") return face === "a" ? <RingBox /> : <RingsCard names={names} date={date} />;
   if (kind === "gift") return face === "a" ? <GiftBox /> : <ConfettiCard names={names} />;
+  if (kind === "rosegate") return face === "a" ? <RoseHeroMini names={names} date={date} /> : <RosePlanMini />;
   return face === "a" ? <WaxCard names={names} date={date} kicker={kicker} /> : <BowCard names={names} date={date} />;
+}
+
+function RoseHeroMini({ names, date }: { names: string; date: string }) {
+  const parts = names.split(/\s(?:و|&)\s/).filter(Boolean);
+  const first = parts[0] ?? names;
+  const second = parts[1];
+  return (
+    <g>
+      <ellipse cx="18" cy="28" rx="40" ry="26" fill="#f4dee0" opacity="0.9" />
+      <ellipse cx="146" cy="118" rx="42" ry="28" fill="#e3ecdf" opacity="0.85" />
+      <text x="80" y="48" textAnchor="middle" fill="#7A6992" fontSize="8" fontStyle="italic" fontFamily="var(--font-amiri), serif">
+        وراء كل باب حكاية
+      </text>
+      <Name y={second ? 86 : 108} size={16} fill="#7A4E55">
+        {first}
+      </Name>
+      {second && (
+        <text x="80" y="104" textAnchor="middle" fill="#C2A267" fontSize="13" fontStyle="italic" fontFamily="var(--font-amiri), serif">
+          &
+        </text>
+      )}
+      {second && (
+        <Name y={128} size={16} fill="#7A4E55">
+          {second}
+        </Name>
+      )}
+      <text x="80" y="156" textAnchor="middle" fill="#8A5E64" fontSize="9" fontFamily={display}>
+        {date}
+      </text>
+      <path d="M46 248 V214 C46 188 114 188 114 214 V248" fill="#f7e7e8" stroke="#C2A267" strokeWidth="1.4" />
+      <path d="M58 248 V220 C58 202 102 202 102 220 V248" fill="#fbf7f4" stroke="#e4d3b8" />
+      <Rose cx={46} cy={206} color="#e7b7c4" scale={0.55} />
+      <Rose cx={114} cy={210} color="#f0c3cf" scale={0.48} />
+      <Rose cx={80} cy={186} color="#f3c6d0" scale={0.5} />
+    </g>
+  );
+}
+
+function RosePlanMini() {
+  const rows = [
+    [78, "استقبال"],
+    [118, "كتب الكتاب"],
+    [158, "العشاء"],
+  ] as const;
+  return (
+    <g>
+      <text x="80" y="40" textAnchor="middle" fill="#7A4E55" fontSize="13" fontFamily={script}>
+        برنامج الحفل
+      </text>
+      <path d="M80 54 v132" stroke="#C2A267" strokeWidth="1" />
+      {rows.map(([y, label]) => (
+        <g key={label}>
+          <circle cx="80" cy={y} r="3.2" fill="#C2A267" />
+          <text x="92" y={y + 4} fill="#8A5E64" fontSize="9" fontFamily={display}>
+            {label}
+          </text>
+        </g>
+      ))}
+      <text x="80" y="214" textAnchor="middle" fill="#C2A267" fontSize="11" fontStyle="italic" fontFamily="var(--font-amiri), serif">
+        مستنيينكم
+      </text>
+      <Rose cx={80} cy={246} color="#e7b7c4" scale={0.7} />
+    </g>
+  );
 }
 
 function WaxCard({ names, date, kicker }: { names: string; date: string; kicker?: string }) {
@@ -487,6 +552,7 @@ function panelColor(kind: OpeningKind) {
   if (kind === "moon") return "#1a2140";
   if (kind === "lavender") return "#efe6f4";
   if (kind === "watercolor" || kind === "bismillah") return "#f3ece4";
+  if (kind === "rosegate") return "#f3ece8";
   if (kind === "gate" || kind === "mashrabiya") return "#f3eee6";
   if (kind === "gift") return "#fff1e4";
   if (kind === "ringbox") return "#f6eee8";
@@ -499,6 +565,7 @@ function paperColor(kind: OpeningKind, face: Face) {
   if (kind === "watercolor") return "#f7f1ea";
   if (kind === "bismillah") return "#f8f1e4";
   if (kind === "mashrabiya") return "#f4ecdf";
+  if (kind === "rosegate") return "#fbf7f4";
   if (kind === "gate") return "#f7f4ef";
   if (kind === "gift") return "#fff7f2";
   if (kind === "ringbox") return "#fff9f6";

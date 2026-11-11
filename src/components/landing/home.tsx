@@ -59,6 +59,16 @@ const gallery: {
   bodyEn: string;
 }[] = [
   {
+    slug: "theme-rose",
+    key: "rose-gate",
+    tag: "فرح · باب ورد",
+    tagEn: "Wedding · a rose gate",
+    names: "يحيى و ليلى",
+    namesEn: "Yahya & Laila",
+    body: "ورق بلون الورد وبوابة زهر. الحكاية تنزل من الباب للبرنامج والقاعة والدعاء.",
+    bodyEn: "Blush paper and a rose gate. The story runs from the door to the plan, the hall, and a prayer.",
+  },
+  {
     slug: "theme-wax",
     key: "wax-roses",
     tag: "فرح · ختم وردي مموج",

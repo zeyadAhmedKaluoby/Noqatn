@@ -23,6 +23,10 @@ function themeEvent(input: {
   names: string[];
   wording: string;
   song?: SongId;
+  date?: string;
+  startTime?: string;
+  venueName?: string;
+  address?: string;
   schedule?: { time: string; label: string }[];
 }) {
   return event({
@@ -35,10 +39,10 @@ function themeEvent(input: {
       photo: "",
       hosts: [],
       honoreeNames: input.names,
-      date: "2027-05-21",
-      startTime: "20:00",
-      venueName: "قاعة الحديقة",
-      address: "القاهرة",
+      date: input.date ?? "2027-05-21",
+      startTime: input.startTime ?? "20:00",
+      venueName: input.venueName ?? "قاعة الحديقة",
+      address: input.address ?? "القاهرة",
       googleMapsUrl: "https://maps.google.com/?q=Cairo",
       wording: input.wording,
       schedule: input.schedule ?? [
@@ -55,6 +59,27 @@ function themeEvent(input: {
 }
 
 const themeDemos: Parameters<typeof themeEvent>[0][] = [
+  {
+    slug: "theme-rose",
+    token: "demo-rose",
+    title: "يحيى و ليلى",
+    type: "WEDDING",
+    templateKey: "rose-gate",
+    names: ["يحيى", "ليلى"],
+    wording: "لكل حد كان سبب في فرحتنا،\nولكل دعوة طلعت من قلب بيحبنا…\nشكرًا إنكم جزء من حكايتنا.",
+    date: "2027-05-08",
+    startTime: "20:00",
+    venueName: "حديقة الورد",
+    address: "المعادي، القاهرة",
+    schedule: [
+      { time: "19:00", label: "استقبال الضيوف" },
+      { time: "19:30", label: "كتب الكتاب" },
+      { time: "20:30", label: "دخول العروسين" },
+      { time: "21:00", label: "الرقصة الأولى" },
+      { time: "21:30", label: "العشاء" },
+      { time: "22:30", label: "تقطيع التورتة" },
+    ],
+  },
   {
     slug: "theme-wax",
     token: "demo-wax",

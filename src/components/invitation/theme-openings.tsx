@@ -90,6 +90,10 @@ function HandIcon() {
   );
 }
 
+export function RoseGateOpening(props: Props) {
+  return <Cover kind="rosegate" {...props} />;
+}
+
 export function BowOpening(props: Props) {
   return <Cover kind="bow" {...props} />;
 }

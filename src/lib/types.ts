@@ -13,6 +13,7 @@ export type TemplateKey =
   | "sebou-festival"
   | "poster-dance"
   | "wax-roses"
+  | "rose-gate"
   | "bow-letter"
   | "watercolor-seal"
   | "bismillah-seal"

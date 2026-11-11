@@ -865,3 +865,667 @@ table.data th {
     width: 7.5rem;
   }
 }
+
+.rose-story {
+  container-type: inline-size;
+  background: #fbf7f4;
+  color: #7a4e55;
+  --tint: #e7eef0;
+}
+
+.rose-sheet {
+  --u: 1cqw;
+  font-family: var(--font-amiri), serif;
+}
+
+.rose-draft {
+  background: #f3dfb6;
+  padding: 0.55rem 1rem;
+  text-align: center;
+  color: #3d2a12;
+  font-family: var(--font-cairo), sans-serif;
+  font-size: 0.92rem;
+}
+
+.rose-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+}
+
+.rose-intro,
+.rose-intro p {
+  margin: 0;
+}
+
+.rose-intro {
+  position: absolute;
+  left: calc(var(--u) * 7.692);
+  right: calc(var(--u) * 7.692);
+  top: calc(var(--u) * 12.308);
+  text-align: center;
+  font-style: italic;
+  font-size: calc(var(--u) * 4.872);
+  line-height: 1.9;
+  color: #7a6992;
+}
+
+.rose-names {
+  margin: 0;
+  position: absolute;
+  left: calc(var(--u) * 10);
+  right: calc(var(--u) * 10);
+  top: calc(var(--u) * 47.179);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rose-name {
+  margin: 0;
+  font-family: var(--font-ruqaa), serif;
+  font-weight: 700;
+  font-size: calc(var(--u) * 13.5);
+  line-height: 1.15;
+  color: #7a4e55;
+}
+
+.rose-amp {
+  margin: 0;
+  font-style: italic;
+  font-size: calc(var(--u) * 8.205);
+  line-height: 1;
+  color: #c2a267;
+}
+
+.rose-date {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--u) * 98.974);
+  margin: 0;
+  text-align: center;
+  font-size: calc(var(--u) * 6.154);
+  letter-spacing: calc(var(--u) * 0.35);
+  color: #8a5e64;
+}
+
+.rose-gate {
+  position: absolute;
+  left: calc(var(--u) * 11.538);
+  top: calc(var(--u) * 117.949);
+  width: calc(var(--u) * 76.923);
+  height: calc(var(--u) * 76.923);
+}
+
+.rose-sec {
+  padding: 3.4rem 1.25rem 2.6rem;
+  text-align: center;
+}
+
+.rose-h {
+  font-family: var(--font-ruqaa), serif;
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.rose-sub,
+.rose-addr,
+.rose-when {
+  margin-top: 0.45rem;
+  color: #8a5e64;
+}
+
+.rose-rule {
+  display: block;
+  width: 13rem;
+  height: 1.6rem;
+  margin: 0.85rem auto 0;
+}
+
+.rose-cd {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 24rem;
+  margin: 1.4rem auto 0;
+}
+
+.rose-cd b {
+  display: block;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rose-cd small {
+  display: block;
+  margin-top: 0.35rem;
+  color: #8a5e64;
+  font-size: 0.85rem;
+}
+
+.rose-zz {
+  position: relative;
+  display: grid;
+  max-width: 28rem;
+  margin: 1.6rem auto 0;
+  gap: 0.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.rose-zz::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 50%;
+  width: 1px;
+  background: #c2a267;
+  transform: translateX(-50%);
+}
+
+.rose-zr {
+  position: relative;
+  display: grid;
+  min-height: calc(var(--u) * 28);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.rose-zp {
+  grid-column: 1;
+  justify-self: end;
+  width: calc(var(--u) * 22);
+  height: calc(var(--u) * 22);
+  margin-inline-end: calc(var(--u) * 4.2);
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f8efec;
+  box-shadow: inset 0 0 0 1px rgba(194, 162, 103, 0.45);
+}
+
+.rose-zt {
+  grid-column: 2;
+  justify-self: start;
+  margin-inline-start: calc(var(--u) * 4.2);
+  text-align: start;
+}
+
+.rose-zr.is-flip .rose-zp {
+  grid-column: 2;
+  justify-self: start;
+  margin-inline: calc(var(--u) * 4.2) 0;
+}
+
+.rose-zr.is-flip .rose-zt {
+  grid-column: 1;
+  justify-self: end;
+  margin-inline: 0 calc(var(--u) * 4.2);
+  text-align: end;
+}
+
+.rose-zt b {
+  display: block;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.rose-zt span {
+  display: block;
+  margin-top: 0.15rem;
+  color: #8a5e64;
+}
+
+.rose-mk {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: #c2a267;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rose-end {
+  margin-top: 1.4rem;
+  font-style: italic;
+  font-size: 1.35rem;
+  color: #c2a267;
+}
+
+.rose-map {
+  margin: 1.2rem auto 0;
+  max-width: 24rem;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  aspect-ratio: 310 / 200;
+}
+
+.rose-hall {
+  margin-top: 1.1rem;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.rose-vbtns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.15rem;
+}
+
+.rose-vb {
+  display: inline-flex;
+  min-height: 2.85rem;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #7a4e55;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0 1rem;
+  color: #7a4e55;
+  font-family: var(--font-cairo), sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rose-vb svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.rose-vb.is-solid {
+  background: #7a4e55;
+  color: #fbf7f4;
+}
+
+.rose-flourish {
+  width: 6.8rem;
+  height: 6.8rem;
+  margin: 1.1rem auto 0;
+}
+
+.rose-paper {
+  margin-inline: auto;
+  max-width: 26rem;
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(circle at 0 0, rgba(244, 222, 224, 0.7), transparent 42%),
+    #fffdfb;
+  padding: 1.7rem 1.15rem 1.3rem;
+  box-shadow: 0 16px 40px rgba(122, 78, 85, 0.08);
+  text-align: start;
+}
+
+.rose-paper h3 {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.rose-salut {
+  margin: 0.35rem 0 0.9rem;
+  text-align: center;
+  font-style: italic;
+  color: #8a5e64;
+}
+
+.rose-story .rose-lined,
+.rose-story .rose-sign {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #7a4e55;
+  font-family: var(--font-amiri), serif;
+}
+
+.rose-story .rose-lined {
+  min-height: 7.5rem;
+  resize: vertical;
+  padding: 0 0.15rem;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(194, 162, 103, 0.55) 32px);
+  background-attachment: local;
+  line-height: 32px;
+  font-size: 1.15rem;
+}
+
+.rose-story .rose-lined:focus,
+.rose-story .rose-sign:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.rose-story .rose-sign {
+  padding: 0.15rem 0 0.2rem;
+  border-bottom: 1px solid #e0d2c4;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.45rem;
+}
+
+.rose-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.3rem;
+  margin-top: 1rem;
+}
+
+.rose-opt {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
+.rose-story .rose-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rose-rd {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  border: 1px solid #c2a267;
+  border-radius: 999px;
+}
+
+.rose-opt:has(input:checked) .rose-rd {
+  border-color: #7a4e55;
+  background: radial-gradient(circle, #7a4e55 42%, transparent 46%);
+}
+
+.rose-sig {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.rose-lbl {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #a0716c;
+  font-family: var(--font-cairo), sans-serif;
+  font-size: 0.75rem;
+}
+
+.rose-stp {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.rose-stp button {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px solid #e0d2c4;
+  border-radius: 999px;
+  background: #fff;
+  padding: 0;
+  color: #7a4e55;
+}
+
+.rose-stp output {
+  min-width: 1.4rem;
+  text-align: center;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.25rem;
+}
+
+.rose-err {
+  margin-top: 0.7rem;
+  color: #9a3040;
+  font-family: var(--font-cairo), sans-serif;
+  font-size: 0.88rem;
+}
+
+.rose-send {
+  display: flex;
+  width: 100%;
+  min-height: 3.1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1.15rem;
+  border-radius: 999px;
+  background: #7a4e55;
+  color: #fbf7f4;
+  font-family: var(--font-cairo), sans-serif;
+  font-weight: 700;
+}
+
+.rose-send svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.rose-ok {
+  text-align: center;
+}
+
+.rose-chk {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 0.7rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #f4dee0;
+  color: #7a4e55;
+}
+
+.rose-chk svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.rose-sum {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+  text-align: start;
+}
+
+.rose-sum .r {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.rose-sum .ci {
+  display: grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: none;
+  place-items: center;
+  border-radius: 999px;
+  background: #f8efec;
+  color: #7a4e55;
+}
+
+.rose-sum .ci svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.rose-sum small {
+  display: block;
+  color: #8a5e64;
+}
+
+.rose-final {
+  margin-top: 2.2rem;
+}
+
+.rose-tag,
+.rose-kicker {
+  color: #c2a267;
+  letter-spacing: 0.28em;
+  font-size: 0.85rem;
+}
+
+.rose-kicker {
+  margin-top: 0.35rem;
+}
+
+.rose-nm {
+  margin-top: 0.35rem;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 2.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.rose-dm {
+  max-width: 22rem;
+  margin: 1rem auto 0;
+  font-size: 1.15rem;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+.rose-dq {
+  max-width: 22rem;
+  margin: 1.3rem auto 0;
+}
+
+.rose-qm {
+  display: block;
+  color: #c2a267;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.rose-dq p {
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.55rem;
+  line-height: 1.85;
+}
+
+.rose-qs {
+  display: block;
+  margin-top: 0.7rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #8a5e64;
+}
+
+.rose-amen {
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+.rose-dua-rule {
+  display: block;
+  width: 13rem;
+  height: 2.2rem;
+  margin: 0.8rem auto 0;
+}
+
+.rose-gift {
+  max-width: 26rem;
+  margin: 1.2rem auto 0;
+  text-align: start;
+  font-family: var(--font-cairo), sans-serif;
+}
+
+.rose-foot {
+  padding: 1.5rem 1.25rem 6.5rem;
+  text-align: center;
+  color: #8a5e64;
+  font-family: var(--font-cairo), sans-serif;
+  font-size: 0.95rem;
+}
+
+.rose-foot a {
+  color: #7a4e55;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.45rem;
+  text-decoration: none;
+}
+
+@keyframes rose-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rose-up {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rose-a,
+.rose-rise {
+  opacity: 0;
+  animation: rose-in 0.9s ease forwards;
+}
+
+.rose-rise {
+  animation-name: rose-up;
+  animation-duration: 1.5s;
+  animation-delay: 0.55s;
+}
+
+.rose-a2 { animation-delay: 0.2s; }
+.rose-a3 { animation-delay: 0.45s; }
+.rose-a4 { animation-delay: 0.7s; }
+.rose-a5 { animation-delay: 0.9s; }
+.rose-a6 { animation-delay: 1.2s; }
+
+.rose-rv {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.rose-rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rose-a,
+  .rose-rise,
+  .rose-rv {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

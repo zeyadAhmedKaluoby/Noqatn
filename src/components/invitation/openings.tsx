@@ -9,6 +9,7 @@ import {
   MoonDoorOpening,
   RingBoxOpening,
   WatercolorOpening,
+  RoseGateOpening,
   WaxOpening,
 } from "@/components/invitation/theme-openings";
 import { PosterStage } from "@/components/invitation/poster";
@@ -298,6 +299,7 @@ export const invitationTemplates = {
   "sebou-festival": SebouOpening,
   "poster-dance": PosterOpening,
   "wax-roses": WaxOpening,
+  "rose-gate": RoseGateOpening,
   "bow-letter": BowOpening,
   "watercolor-seal": WatercolorOpening,
   "bismillah-seal": BismillahOpening,
