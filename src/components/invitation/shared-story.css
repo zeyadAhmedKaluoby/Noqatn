@@ -1,0 +1,327 @@
+/* Shared full-story demos — uses invitation theme CSS variables */
+.shared-story {
+  position: relative;
+  min-height: 100svh;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-cairo), sans-serif;
+}
+
+.shared-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: var(--stage);
+  color: var(--ink);
+  transition: opacity 0.7s ease, transform 1s ease;
+}
+
+.shared-story.tone-dark .shared-cover {
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.shared-cover.is-go {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.shared-cover.is-gone {
+  display: none;
+}
+
+.shared-face {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  min-height: 100%;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+.shared-story.cover-frame .shared-face {
+  margin: auto;
+  width: min(360px, 88vw);
+  min-height: min(70svh, 640px);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  box-shadow: inset 0 0 0 10px color-mix(in srgb, var(--card) 70%, transparent);
+  background: var(--card);
+}
+
+.shared-ey {
+  margin: 0;
+  letter-spacing: 0.32em;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.shared-guest {
+  margin: 0.55rem 0 0;
+  font-size: 0.95rem;
+}
+
+.shared-mono {
+  margin: 1rem 0 0.35rem;
+  font-family: var(--font-messiri), serif;
+  letter-spacing: 0.16em;
+  font-size: 1.05rem;
+}
+
+.shared-names {
+  margin: 0;
+  display: grid;
+  gap: 0.15rem;
+  font-family: var(--font-ruqaa), serif;
+  font-size: clamp(2.3rem, 11vw, 3.1rem);
+  line-height: 1.05;
+}
+
+.shared-names i,
+.shared-hero h2 i {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.shared-dt {
+  margin: 0.75rem 0 0;
+  letter-spacing: 0.16em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.shared-tap {
+  margin-top: 1.35rem;
+  justify-self: center;
+  padding: 0.65rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.shared-seal {
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: 1rem auto 0.2rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--petal) 80%, white), var(--gold) 62%, var(--button) 100%);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 18%, transparent);
+  animation: shared-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes shared-breathe {
+  0%,
+  100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.shared-leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(180deg, var(--stage), var(--card));
+  transition: transform 1.5s cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+.shared-leaf.l {
+  left: 0;
+  transform-origin: left center;
+  border-inline-end: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.shared-leaf.r {
+  right: 0;
+  transform-origin: right center;
+}
+
+.shared-cover.is-go .shared-leaf.l {
+  transform: perspective(900px) rotateY(88deg);
+}
+
+.shared-cover.is-go .shared-leaf.r {
+  transform: perspective(900px) rotateY(-88deg);
+}
+
+.shared-seam {
+  position: absolute;
+  inset: 0 50% 0 auto;
+  width: 2px;
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.shared-cover.is-go .shared-seam {
+  opacity: 0;
+}
+
+.shared-main {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+
+.shared-main.is-on {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.shared-hero,
+.shared-block {
+  padding: 2.2rem 1.35rem;
+  text-align: center;
+}
+
+.shared-lead {
+  margin: 0;
+  font-family: var(--font-amiri), serif;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+.shared-hero h2 {
+  margin: 1.15rem 0 0.35rem;
+  font-family: var(--font-ruqaa), serif;
+  font-size: clamp(2.3rem, 11vw, 3rem);
+  line-height: 1.1;
+}
+
+.shared-when {
+  margin: 0.3rem 0 0;
+  letter-spacing: 0.05em;
+}
+
+.shared-block h3 {
+  margin: 0;
+  font-family: var(--font-messiri), serif;
+  font-size: 1.65rem;
+}
+
+.shared-kicker {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  color: var(--gold);
+}
+
+.shared-venue {
+  margin: 0.7rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.shared-muted {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.shared-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.shared-actions a {
+  display: inline-flex;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.shared-cd {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.shared-cd > div {
+  padding: 0.85rem 0.2rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.shared-cd b {
+  display: block;
+  font-family: var(--font-messiri), serif;
+  font-size: 1.5rem;
+}
+
+.shared-cd span {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.shared-block ul {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+  text-align: start;
+}
+
+.shared-block li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.shared-dua {
+  background: color-mix(in srgb, var(--card) 88%, var(--stage));
+}
+
+.shared-wording {
+  margin: 1rem auto 0;
+  max-width: 28rem;
+  white-space: pre-line;
+  line-height: 1.95;
+}
+
+.shared-dua blockquote {
+  margin: 1.2rem auto 0;
+  max-width: 24rem;
+  font-family: var(--font-amiri), serif;
+  font-size: 1.12rem;
+  line-height: 2;
+}
+
+.shared-amen {
+  margin: 1rem 0 0;
+}
+
+.shared-end {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-ruqaa), serif;
+  font-size: 1.55rem;
+}
+
+.shared-foot {
+  padding: 1.5rem 1.2rem 5.5rem;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.shared-foot a {
+  color: inherit;
+  font-weight: 700;
+}

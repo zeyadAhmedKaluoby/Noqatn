@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE } from "@/lib/site";
 
 export function LogoMark({ size = 44 }: { size?: number }) {
   return (
@@ -19,7 +20,7 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5 text-[#241910]">
       <LogoMark />
-      <span className="font-display text-3xl leading-none">نقطني</span>
+      <span className="font-display text-3xl leading-none">{SITE.brandAr}</span>
     </Link>
   );
 }
@@ -29,11 +30,11 @@ export function SiteHeader() {
     <header className="site-header">
       <Logo />
       <nav className="hidden items-center gap-6 text-sm md:flex">
-        <Link href="/#themes">القوالب</Link>
-        <Link href="/manage/demo-layla">لوحة الدعوة</Link>
+        <Link href="/#demos">النماذج</Link>
+        <Link href="/#packages">الباكدجات</Link>
       </nav>
-      <Link href="/create" className="btn btn-ink">
-        أنشئ دعوة
+      <Link href="/order" className="btn btn-ink">
+        اطلب دعوتك
       </Link>
     </header>
   );
@@ -45,9 +46,11 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <Logo />
         <p className="max-w-xl leading-7">
-          دعوات للزفاف والخطوبة والسبوع والعقيقة وعيد الميلاد. الضيف بلا حساب، وصاحب الدعوة برابط إدارة خاص.
-          الدفع في هذه النسخة محاكاة داخل المتصفح.
+          © {new Date().getFullYear()} {SITE.brandAr}. دعوات أونلاين من مصر.
         </p>
+        <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline">
+          {SITE.instagramHandle}
+        </a>
       </div>
     </footer>
   );

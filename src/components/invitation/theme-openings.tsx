@@ -129,3 +129,39 @@ export function RingBoxOpening(props: Props) {
 export function GiftBurstOpening(props: Props) {
   return <Cover kind="gift" {...props} />;
 }
+
+export function ClassicOpening(props: Props) {
+  return <Cover kind="classic" {...props} />;
+}
+
+export function NavyOpening(props: Props) {
+  return <Cover kind="navy" {...props} />;
+}
+
+export function BabOpening(props: Props) {
+  return <Cover kind="bab" {...props} />;
+}
+
+export function SageOpening(props: Props) {
+  return <Cover kind="sage" {...props} />;
+}
+
+export function BlushOpening(props: Props) {
+  return <Cover kind="blush" {...props} />;
+}
+
+export function IvoryOpening(props: Props) {
+  return <Cover kind="ivory" {...props} />;
+}
+
+export function EmberOpening(props: Props) {
+  return <Cover kind="ember" light {...props} />;
+}
+
+export function MistOpening(props: Props) {
+  return <Cover kind="mist" {...props} />;
+}
+
+export function SandOpening(props: Props) {
+  return <Cover kind="sand" {...props} />;
+}

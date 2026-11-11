@@ -22,7 +22,13 @@ export function readStore(): Store {
     const freshBySlug = new Map(fresh.events.map((event) => [event.slug, event]));
     const events = parsed.events.map((item) => {
       const seed = freshBySlug.get(item.slug);
-      if (seed && item.slug.startsWith("theme-")) return seed;
+      if (
+        seed &&
+        (item.slug.startsWith("theme-") ||
+          ["classic", "navy", "bab", "sage", "blush", "ivory", "ember", "mist", "sand"].includes(item.slug))
+      ) {
+        return seed;
+      }
       return item;
     });
     for (const event of fresh.events) {

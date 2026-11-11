@@ -8,9 +8,9 @@ import type { InvitationEvent, RsvpStatus } from "@/lib/types";
 
 const PRESETS = [20000, 50000, 100000, 200000];
 
-export function RsvpForm({ event }: { event: InvitationEvent }) {
+export function RsvpForm({ event, defaultName = "" }: { event: InvitationEvent; defaultName?: string }) {
   const { addRsvp } = useStore();
-  const [name, setName] = useState("");
+  const [name, setName] = useState(defaultName);
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<RsvpStatus>("ATTENDING");
   const [guests, setGuests] = useState(1);

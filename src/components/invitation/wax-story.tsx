@@ -8,7 +8,7 @@ import type { InvitationEvent } from "@/lib/types";
 
 type Phase = "closed" | "opening" | "open";
 
-export function WaxStory({ event, onOpen }: { event: InvitationEvent; onOpen: () => void }) {
+export function WaxStory({ event, onOpen, guestTo }: { event: InvitationEvent; onOpen: () => void; guestTo?: string }) {
   const [phase, setPhase] = useState<Phase>("closed");
   const [first, second] = event.details.honoreeNames;
   const groom = second ?? first;
@@ -111,7 +111,7 @@ export function WaxStory({ event, onOpen }: { event: InvitationEvent; onOpen: ()
           <h2 className="mt-3 text-center font-[family-name:var(--font-ruqaa)] text-4xl">تشرفونا؟</h2>
           <p className="mt-2 text-center text-sm text-[#a0716c]">نرجو الرد قبل يوم الفرح</p>
           <div className="mt-6">
-            <RsvpForm event={event} />
+            <RsvpForm event={event} defaultName={guestTo} />
           </div>
         </section>
       )}

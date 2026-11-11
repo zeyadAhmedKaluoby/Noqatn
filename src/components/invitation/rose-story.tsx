@@ -5,12 +5,12 @@ import Link from "next/link";
 import { RoseMotif, type RoseMotifKind } from "@/components/invitation/rose-art";
 import { GiftForm } from "@/components/invitation/forms";
 import { useStore } from "@/components/store";
-import { displayNames, formatArabicDate, formatNumber, formatTime, uid } from "@/lib/format";
+import { calendarLink, displayNames, formatArabicDate, formatNumber, formatTime, uid } from "@/lib/format";
 import type { InvitationEvent } from "@/lib/types";
 
 const MOTIFS: RoseMotifKind[] = ["arch", "ring", "couple", "gate", "roses", "cake"];
 
-export function RoseStory({ event }: { event: InvitationEvent }) {
+export function RoseStory({ event, guestTo }: { event: InvitationEvent; guestTo?: string }) {
   const [first, second] = event.details.honoreeNames;
   const names = displayNames(event.details.honoreeNames);
   const when = `${formatArabicDate(event.details.date)} · ${formatTime(event.details.startTime)}`;
@@ -22,9 +22,10 @@ export function RoseStory({ event }: { event: InvitationEvent }) {
       <section className="rose-hero">
         <HeroPaper />
         <div className="rose-intro">
-          <p className="rose-a rose-a2">وراء كل باب حكاية،</p>
-          <p className="rose-a rose-a3">وحكايتنا بدأت من هنا…</p>
-          <p className="rose-a rose-a4">افتحوا الباب وشاركونا الفرحة.</p>
+          {guestTo ? <p className="rose-a rose-a2">أهلاً {guestTo}،</p> : null}
+          <p className={`rose-a ${guestTo ? "rose-a3" : "rose-a2"}`}>وراء كل باب حكاية،</p>
+          <p className={`rose-a ${guestTo ? "rose-a4" : "rose-a3"}`}>وحكايتنا بدأت من هنا…</p>
+          <p className={`rose-a ${guestTo ? "rose-a5" : "rose-a4"}`}>افتحوا الباب وشاركونا الفرحة.</p>
         </div>
         <h1 className="rose-names rose-a rose-a5">
           <span className="rose-name">{first}</span>
@@ -487,19 +488,6 @@ function guestPhrase(count: number) {
   if (count <= 1) return "ضيف واحد";
   if (count === 2) return "ضيفان";
   return `${formatNumber(count)} ضيوف`;
-}
-
-function calendarLink(event: InvitationEvent) {
-  const start = new Date(`${event.details.date}T${event.details.startTime || "20:00"}:00`);
-  const end = new Date(start.getTime() + 5 * 60 * 60 * 1000);
-  const stamp = (date: Date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: event.title,
-    dates: `${stamp(start)}/${stamp(end)}`,
-    location: [event.details.venueName, event.details.address].filter(Boolean).join("، "),
-  });
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 function PinIcon() {

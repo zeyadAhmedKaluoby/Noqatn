@@ -79,7 +79,156 @@ function draw(kind: OpeningKind, face: Face, names: string, date: string, kicker
   if (kind === "ringbox") return face === "a" ? <RingBox /> : <RingsCard names={names} date={date} />;
   if (kind === "gift") return face === "a" ? <GiftBox /> : <ConfettiCard names={names} />;
   if (kind === "rosegate") return face === "a" ? <RoseHeroMini names={names} date={date} /> : <RosePlanMini />;
+  if (kind === "classic") return face === "a" ? <ClassicMini names={names} date={date} /> : <ClassicQuoteMini />;
+  if (kind === "navy") return face === "a" ? <NavyMini names={names} date={date} /> : <NavyPlanMini names={names} />;
+  if (kind === "bab") return face === "a" ? <BabMini names={names} date={date} /> : <BabOpenMini names={names} />;
+  if (kind === "sage" || kind === "mist" || kind === "sand" || kind === "ivory" || kind === "ember" || kind === "blush") {
+    return face === "a" ? <SharedCoverMini kind={kind} names={names} date={date} /> : <SharedOpenMini kind={kind} names={names} />;
+  }
   return face === "a" ? <WaxCard names={names} date={date} kicker={kicker} /> : <BowCard names={names} date={date} />;
+}
+
+function SharedCoverMini({
+  kind,
+  names,
+  date,
+}: {
+  kind: "sage" | "mist" | "sand" | "ivory" | "ember" | "blush";
+  names: string;
+  date: string;
+}) {
+  const dark = kind === "ember";
+  const ink = dark ? "#f4ead7" : "#3a2e22";
+  const gold = kind === "mist" ? "#8d74a8" : kind === "sage" ? "#a38b52" : "#c2a267";
+  return (
+    <g>
+      {kind === "blush" ? <circle cx="80" cy="96" r="26" fill={gold} opacity="0.9" /> : null}
+      {kind === "ivory" || kind === "ember" ? (
+        <rect x="28" y="42" width="104" height="160" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      ) : null}
+      <Name y={kind === "blush" ? 150 : 110} size={12} fill={ink}>
+        {names}
+      </Name>
+      <text x="80" y={kind === "blush" ? 172 : 132} textAnchor="middle" fill={gold} fontSize="8" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function SharedOpenMini({ kind, names }: { kind: "sage" | "mist" | "sand" | "ivory" | "ember" | "blush"; names: string }) {
+  const ink = kind === "ember" ? "#f4ead7" : "#3a2e22";
+  return (
+    <g>
+      <Name y={100} size={13} fill={ink}>
+        {names}
+      </Name>
+      <rect x="40" y="128" width="80" height="8" rx="4" fill={kind === "mist" ? "#d7c4ea" : "#d9d3c5"} />
+      <rect x="48" y="148" width="64" height="8" rx="4" fill={kind === "sage" ? "#d5e0c8" : "#ead7b0"} />
+    </g>
+  );
+}
+
+function ClassicMini({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="18" y="28" width="124" height="170" rx="8" fill="#efe6d8" />
+      <circle cx="80" cy="108" r="28" fill="#c9a45c" opacity="0.85" />
+      <circle cx="80" cy="108" r="18" fill="#8a6a32" />
+      <text x="80" y="112" textAnchor="middle" fill="#f8f1e4" fontSize="10" fontFamily={script}>
+        ختم
+      </text>
+      <Name y={188} size={13} fill="#3a2e22">
+        {names}
+      </Name>
+      <text x="80" y="208" textAnchor="middle" fill="#7a6a58" fontSize="8" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function ClassicQuoteMini() {
+  return (
+    <g>
+      <rect x="18" y="36" width="124" height="190" rx="8" fill="#fffaf3" />
+      <text x="80" y="78" textAnchor="middle" fill="#b08a45" fontSize="9" fontFamily={display}>
+        بِسْمِ اللهِ
+      </text>
+      <text x="80" y="118" textAnchor="middle" fill="#3a2e22" fontSize="9" fontFamily={display}>
+        وَجَعَلَ بَيْنَكُمْ
+      </text>
+      <text x="80" y="138" textAnchor="middle" fill="#3a2e22" fontSize="9" fontFamily={display}>
+        مَوَدَّةً وَرَحْمَةً
+      </text>
+      <ellipse cx="80" cy="188" rx="36" ry="12" fill="#ead7b0" opacity="0.7" />
+    </g>
+  );
+}
+
+function NavyMini({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="14" y="22" width="132" height="220" rx="10" fill="#1a2744" />
+      <path d="M40 70 h80 v90 h-80 z" fill="#f4efe6" opacity="0.92" />
+      <path d="M52 70 v-18 h56 v18" fill="none" stroke="#c9a45c" strokeWidth="2" />
+      <Name y={120} size={12} fill="#1a2744">
+        {names}
+      </Name>
+      <text x="80" y="142" textAnchor="middle" fill="#5c6a82" fontSize="8" fontFamily={display}>
+        {date}
+      </text>
+      <text x="80" y="210" textAnchor="middle" fill="#f4efe6" fontSize="8" fontFamily={display}>
+        اضغط لفتح الدعوة
+      </text>
+    </g>
+  );
+}
+
+function NavyPlanMini({ names }: { names: string }) {
+  return (
+    <g>
+      <rect x="18" y="30" width="124" height="200" rx="8" fill="#fbf8f1" />
+      <Name y={88} size={13} fill="#1a2744">
+        {names}
+      </Name>
+      <rect x="36" y="118" width="88" height="10" rx="4" fill="#dfe3ea" />
+      <rect x="44" y="140" width="72" height="10" rx="4" fill="#dfe3ea" />
+      <rect x="52" y="162" width="56" height="10" rx="4" fill="#dfe3ea" />
+    </g>
+  );
+}
+
+function BabMini({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="18" y="36" width="58" height="170" rx="4" fill="#d9c4a4" />
+      <rect x="84" y="36" width="58" height="170" rx="4" fill="#d2bb98" />
+      <circle cx="70" cy="120" r="5" fill="#8a6f5a" />
+      <circle cx="90" cy="120" r="5" fill="#8a6f5a" />
+      <Name y={230} size={11} fill="#4a3a2e">
+        {names}
+      </Name>
+      <text x="80" y="26" textAnchor="middle" fill="#7d6b59" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function BabOpenMini({ names }: { names: string }) {
+  return (
+    <g>
+      <rect x="18" y="36" width="124" height="190" rx="8" fill="#fffdf8" />
+      <ellipse cx="80" cy="96" rx="40" ry="28" fill="#e7d3b4" opacity="0.7" />
+      <Name y={150} size={13} fill="#4a3a2e">
+        {names}
+      </Name>
+      <text x="80" y="176" textAnchor="middle" fill="#7d6b59" fontSize="8" fontFamily={display}>
+        الباب اتفتح
+      </text>
+    </g>
+  );
 }
 
 function RoseHeroMini({ names, date }: { names: string; date: string }) {
@@ -550,9 +699,13 @@ function Sprig({ x, y, flip = false, color = "#7d9a72" }: { x: number; y: number
 
 function panelColor(kind: OpeningKind) {
   if (kind === "moon") return "#1a2140";
-  if (kind === "lavender") return "#efe6f4";
-  if (kind === "watercolor" || kind === "bismillah") return "#f3ece4";
-  if (kind === "rosegate") return "#f3ece8";
+  if (kind === "navy") return "#d8dee8";
+  if (kind === "ember") return "#0d1c16";
+  if (kind === "lavender" || kind === "mist") return "#efe6f4";
+  if (kind === "sage") return "#e8eee4";
+  if (kind === "sand") return "#eceae4";
+  if (kind === "watercolor" || kind === "bismillah" || kind === "classic" || kind === "ivory") return "#f3ece4";
+  if (kind === "rosegate" || kind === "bab" || kind === "blush") return "#f3ece8";
   if (kind === "gate" || kind === "mashrabiya") return "#f3eee6";
   if (kind === "gift") return "#fff1e4";
   if (kind === "ringbox") return "#f6eee8";
@@ -561,11 +714,17 @@ function panelColor(kind: OpeningKind) {
 
 function paperColor(kind: OpeningKind, face: Face) {
   if (kind === "moon") return face === "a" ? "#141a33" : "#1b2344";
-  if (kind === "lavender") return "#fbf8fd";
+  if (kind === "navy") return face === "a" ? "#1a2744" : "#fbf8f1";
+  if (kind === "ember") return face === "a" ? "#10241d" : "#173128";
+  if (kind === "lavender" || kind === "mist") return "#fbf8fd";
+  if (kind === "sage") return "#fbfcf8";
+  if (kind === "sand") return "#ffffff";
   if (kind === "watercolor") return "#f7f1ea";
-  if (kind === "bismillah") return "#f8f1e4";
+  if (kind === "bismillah" || kind === "classic" || kind === "ivory") return "#f8f1e4";
   if (kind === "mashrabiya") return "#f4ecdf";
   if (kind === "rosegate") return "#fbf7f4";
+  if (kind === "bab") return "#f7f3ec";
+  if (kind === "blush") return "#fffaf6";
   if (kind === "gate") return "#f7f4ef";
   if (kind === "gift") return "#fff7f2";
   if (kind === "ringbox") return "#fff9f6";

@@ -10,9 +10,25 @@ export const instant = false;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const event = SEED_EVENTS.find((item) => item.slug === slug);
+  const title = event?.title ?? "دعوة";
+  const description = event?.details.wording ?? "دعوة تفاعلية من نقطني";
+  const photo = event?.details.photo;
   return {
-    title: event?.title ?? "دعوة",
-    description: event?.details.wording ?? "دعوة تفاعلية من نقطني",
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "ar_EG",
+      ...(photo ? { images: [{ url: photo }] } : {}),
+    },
+    twitter: {
+      card: photo ? "summary_large_image" : "summary",
+      title,
+      description,
+      ...(photo ? { images: [photo] } : {}),
+    },
   };
 }
 

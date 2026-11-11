@@ -3,11 +3,13 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { InvitationView } from "@/components/invitation/InvitationView";
+import { useInviteKit } from "@/components/invitation/hooks/useInviteKit";
 import { useStore } from "@/components/store";
 import { getTemplate } from "@/lib/templates";
 
 export function InvitationScreen({ slug }: { slug: string }) {
   const { store, ready, bumpVisit } = useStore();
+  const { guestTo, lang, toggleLang } = useInviteKit();
   const event = store.events.find((item) => item.slug === slug);
   const counted = useRef(false);
 
@@ -43,5 +45,13 @@ export function InvitationScreen({ slug }: { slug: string }) {
     );
   }
 
-  return <InvitationView event={event} template={getTemplate(event.templateKey)} />;
+  return (
+    <InvitationView
+      event={event}
+      template={getTemplate(event.templateKey)}
+      guestTo={guestTo}
+      lang={lang}
+      onToggleLang={toggleLang}
+    />
+  );
 }

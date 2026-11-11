@@ -1,4 +1,4 @@
-import type { EventType, RsvpStatus, ScheduleItem } from "@/lib/types";
+import type { EventType, InvitationEvent, RsvpStatus, ScheduleItem } from "@/lib/types";
 
 export function displayNames(names: string[]) {
   return names.map((name) => name.trim()).filter(Boolean).join(" و ");
@@ -116,3 +116,22 @@ export const GIFT_LABEL = {
   PENDING: "قيد الدفع",
   FAILED: "لم تكتمل",
 } as const;
+
+export function calendarLink(event: InvitationEvent) {
+  const start = new Date(`${event.details.date}T${event.details.startTime || "20:00"}:00`);
+  const end = new Date(start.getTime() + 5 * 60 * 60 * 1000);
+  const stamp = (date: Date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: event.title,
+    dates: `${stamp(start)}/${stamp(end)}`,
+    location: [event.details.venueName, event.details.address].filter(Boolean).join("، "),
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+/** Personalized guest name from ?to= (max 40 chars, like Ma3zoom). */
+export function guestFromTo(value: string | null | undefined) {
+  const name = (value ?? "").trim().slice(0, 40);
+  return name || undefined;
+}
