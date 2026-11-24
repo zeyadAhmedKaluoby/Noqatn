@@ -10,15 +10,20 @@ import { GuestRibbon, InviteLangButton, inviteCopy } from "@/components/invitati
 import { InvitePhoto } from "@/components/invitation/photo";
 import { PosterMasthead } from "@/components/invitation/poster";
 import { invitationTemplates } from "@/components/invitation/openings";
-import { BabStory } from "@/components/invitation/bab-story";
-import { ClassicStory } from "@/components/invitation/classic-story";
-import { NavyStory } from "@/components/invitation/navy-story";
 import { RoseStory } from "@/components/invitation/rose-story";
-import { SharedStory } from "@/components/invitation/shared-story";
-import { WaxStory } from "@/components/invitation/wax-story";
-import { getStoryDemo, STORY_DEMO_KEYS } from "@/lib/story-demos";
+import { STORY_REGISTRY } from "@/components/invitation/story-kit/registry";
 import "@/components/invitation/ma3zoom-stories.css";
 import "@/components/invitation/shared-story.css";
+import "@/components/invitation/story-kit/story-kit.css";
+import "@/components/invitation/promise-story.css";
+import "@/components/invitation/balloons-story.css";
+import "@/components/invitation/zaffa-story.css";
+import "@/components/invitation/aqiqah-story.css";
+import "@/components/invitation/sebou-story.css";
+import "@/components/invitation/ringbox-story.css";
+import "@/components/invitation/festive/festive.css";
+import "@/components/invitation/polaroid-story.css";
+import "@/components/invitation/wedding/wedding.css";
 import { calendarLink, displayNames, formatArabicDate, formatNumber, formatTime } from "@/lib/format";
 import { startSong } from "@/lib/music";
 import { getSong } from "@/lib/songs";
@@ -118,111 +123,28 @@ export function InvitationView({
     );
   }
 
-  if (template.key === "wax-roses") {
+  const story = STORY_REGISTRY[template.key];
+  if (story) {
     return (
-      <div className="min-h-svh" style={{ background: template.colors.stage }}>
+      <div className={`${story.pageClass ?? ""} min-h-svh`.trim()} style={{ background: template.colors.stage }}>
         <InviteLangButton lang={lang} onToggle={onToggleLang} />
-        <article className="invitation mx-auto w-full max-w-[480px] overflow-visible bg-[#f8efec]" style={themeVars(template)}>
+        <article
+          className={`invitation mx-auto w-full max-w-[480px] ${story.articleClass}`}
+          style={story.paintBackground ? { ...themeVars(template), background: template.colors.bg } : themeVars(template)}
+        >
           <GuestRibbon name={guestTo} lang={lang} />
-          <WaxStory
+          <story.Story
             event={event}
             guestTo={guestTo}
-            onOpen={() => {
+            onOpen={(quick) => {
               startMusic();
-              window.setTimeout(() => setStoryOpen(true), 1500);
+              window.setTimeout(() => setStoryOpen(true), story.ctaDelay(quick));
             }}
           />
         </article>
         {storyOpen && <StoryCta muted={muted} audioFailed={audioFailed} music={event.design.music} unmute={t.unmute} mute={t.mute} onMute={() => setMuted((value) => !value)} />}
       </div>
     );
-  }
-
-  if (template.key === "classic-wax") {
-    return (
-      <div className="min-h-svh" style={{ background: template.colors.stage }}>
-        <InviteLangButton lang={lang} onToggle={onToggleLang} />
-        <article className="invitation mx-auto w-full max-w-[480px] overflow-x-clip bg-[#f7f1e8]" style={themeVars(template)}>
-          <GuestRibbon name={guestTo} lang={lang} />
-          <ClassicStory
-            event={event}
-            guestTo={guestTo}
-            onOpen={() => {
-              startMusic();
-              window.setTimeout(() => setStoryOpen(true), 900);
-            }}
-          />
-        </article>
-        {storyOpen && <StoryCta muted={muted} audioFailed={audioFailed} music={event.design.music} unmute={t.unmute} mute={t.mute} onMute={() => setMuted((value) => !value)} />}
-      </div>
-    );
-  }
-
-  if (template.key === "navy-castle") {
-    return (
-      <div className="min-h-svh" style={{ background: template.colors.stage }}>
-        <InviteLangButton lang={lang} onToggle={onToggleLang} />
-        <article className="invitation mx-auto w-full max-w-[480px] overflow-x-clip bg-[#f4efe6]" style={themeVars(template)}>
-          <GuestRibbon name={guestTo} lang={lang} />
-          <NavyStory
-            event={event}
-            guestTo={guestTo}
-            onOpen={() => {
-              startMusic();
-              window.setTimeout(() => setStoryOpen(true), 1100);
-            }}
-          />
-        </article>
-        {storyOpen && <StoryCta muted={muted} audioFailed={audioFailed} music={event.design.music} unmute={t.unmute} mute={t.mute} onMute={() => setMuted((value) => !value)} />}
-      </div>
-    );
-  }
-
-  if (template.key === "bab-doors") {
-    return (
-      <div className="min-h-svh" style={{ background: template.colors.stage }}>
-        <InviteLangButton lang={lang} onToggle={onToggleLang} />
-        <article className="invitation mx-auto w-full max-w-[480px] overflow-x-clip bg-[#f7f3ec]" style={themeVars(template)}>
-          <GuestRibbon name={guestTo} lang={lang} />
-          <BabStory
-            event={event}
-            guestTo={guestTo}
-            onOpen={() => {
-              startMusic();
-              window.setTimeout(() => setStoryOpen(true), 1700);
-            }}
-          />
-        </article>
-        {storyOpen && <StoryCta muted={muted} audioFailed={audioFailed} music={event.design.music} unmute={t.unmute} mute={t.mute} onMute={() => setMuted((value) => !value)} />}
-      </div>
-    );
-  }
-
-  if (STORY_DEMO_KEYS.has(template.key)) {
-    const demo = getStoryDemo(template.key);
-    if (demo) {
-      return (
-        <div className="min-h-svh" style={{ background: template.colors.stage }}>
-          <InviteLangButton lang={lang} onToggle={onToggleLang} />
-          <article
-            className="invitation mx-auto w-full max-w-[480px] overflow-x-clip"
-            style={{ ...themeVars(template), background: template.colors.bg }}
-          >
-            <GuestRibbon name={guestTo} lang={lang} />
-            <SharedStory
-              event={event}
-              guestTo={guestTo}
-              demo={demo}
-              onOpen={() => {
-                startMusic();
-                window.setTimeout(() => setStoryOpen(true), demo.durationMs);
-              }}
-            />
-          </article>
-          {storyOpen && <StoryCta muted={muted} audioFailed={audioFailed} music={event.design.music} unmute={t.unmute} mute={t.mute} onMute={() => setMuted((value) => !value)} />}
-        </div>
-      );
-    }
   }
 
   return (

@@ -15,6 +15,9 @@ import {
   MoonDoorOpening,
   NavyOpening,
   RingBoxOpening,
+  PromiseRibbonOpening,
+  GoldenBalloonsOpening,
+  ZaffaCandlesOpening,
   SageOpening,
   SandOpening,
   WatercolorOpening,
@@ -326,5 +329,8 @@ export const invitationTemplates = {
   "mashrabiya-door": MashrabiyaOpening,
   "moon-door": MoonDoorOpening,
   "ring-box": RingBoxOpening,
+  "promise-ribbon": PromiseRibbonOpening,
+  "golden-balloons": GoldenBalloonsOpening,
+  "zaffa-candles": ZaffaCandlesOpening,
   "gift-burst": GiftBurstOpening,
 } as const;

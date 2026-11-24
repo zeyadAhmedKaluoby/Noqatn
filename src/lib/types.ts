@@ -31,6 +31,9 @@ export type TemplateKey =
   | "mashrabiya-door"
   | "moon-door"
   | "ring-box"
+  | "promise-ribbon"
+  | "golden-balloons"
+  | "zaffa-candles"
   | "gift-burst";
 
 export type AnimationLevel = "NONE" | "SUBTLE" | "FULL";

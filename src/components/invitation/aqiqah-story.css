@@ -1,0 +1,798 @@
+/* ─────────────────────────────────────────────────────────────
+   غصن الزيتون · Olive Branch — aqiqah
+   Sage paper, olive green, soft brass. Calm and thankful.
+   Scoped under .aq / .aq-page; keyframes prefixed aq-.
+   ───────────────────────────────────────────────────────────── */
+
+.aq {
+  --aq-forest: #2f4237;
+  --aq-forest-deep: #1f2e25;
+  --aq-ink: #243028;
+  --aq-muted: #5b6b5d;
+  --aq-paper: #f3f5ef;
+  --aq-card: #fbfcf8;
+  --aq-sage: #6e8b6a;
+  --aq-gold: #a38b52;
+  --aq-gold-ink: #7a6637;
+  --aq-cream: #eef2e6;
+  position: relative;
+  background:
+    radial-gradient(100% 36% at 50% 0%, rgba(214, 226, 200, 0.7), transparent 70%),
+    var(--aq-paper);
+  color: var(--aq-ink);
+  font-family: var(--tf-body);
+}
+
+/* ───────── Cover ───────── */
+
+.aq-cover {
+  position: fixed;
+  inset-block: 0;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  width: min(100%, 480px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+  transform: translateX(-50%);
+  color: var(--aq-ink);
+  text-align: center;
+  transition: opacity 0.7s ease;
+}
+
+.aq-sky,
+.aq-dawn {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aq-sky {
+  z-index: 0;
+  background:
+    radial-gradient(70% 40% at 50% 38%, rgba(255, 255, 255, 0.55), transparent 70%),
+    linear-gradient(180deg, #e9efdf 0%, #cdd9c2 100%);
+}
+
+.aq-dawn {
+  z-index: 3;
+  background:
+    radial-gradient(70% 45% at 50% 40%, #fffdf4, transparent 80%),
+    var(--aq-paper);
+  opacity: 0;
+}
+
+.aq-cover > :not(.aq-sky, .aq-dawn) {
+  position: relative;
+  z-index: 1;
+}
+
+.aq-cover-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--aq-gold-ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.aq-cover-kicker::before,
+.aq-cover-kicker::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.aq-cover-basmala {
+  margin-top: 0.4rem;
+  font-family: var(--tf-ar-verse);
+  font-size: 1.15rem;
+  color: var(--aq-muted);
+}
+
+.aq-cover-art {
+  display: block;
+  width: min(62%, 230px);
+  margin-top: 0.5rem;
+}
+
+.aq-branch {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 26% 94%;
+  filter: drop-shadow(0 12px 16px rgba(47, 66, 55, 0.18));
+}
+
+.aq-cover:not(.is-go) .aq-branch {
+  animation: aq-sway 6s ease-in-out infinite;
+}
+
+.aq-stem {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: aq-draw 1.5s cubic-bezier(0.5, 0, 0.3, 1) 0.2s forwards;
+}
+
+.aq-leaf,
+.aq-olive {
+  transform-box: fill-box;
+}
+
+.aq-leaf {
+  transform-origin: 0% 50%;
+}
+
+.aq-olive {
+  transform-origin: 50% 50%;
+}
+
+/* folded until the guest taps */
+.aq-cover .aq-leaf {
+  transform: scale(0.6) rotate(-10deg);
+}
+
+.aq-cover .aq-olive {
+  transform: scale(0);
+}
+
+.aq-cover-name {
+  max-width: 100%;
+  margin-top: 0.4rem;
+  font-family: var(--tf-ar-script);
+  font-size: clamp(2.3rem, 11vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.aq-cover-date {
+  margin-top: 0.3rem;
+  color: var(--aq-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+}
+
+.aq-cover-hint {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+  color: var(--aq-muted);
+  font-size: 0.95rem;
+  transition: opacity 0.4s;
+}
+
+.aq-tap {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--aq-forest) 45%, transparent);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--aq-forest);
+  animation: aq-tap 2.2s ease-in-out infinite;
+}
+
+/* opening: leaves unfold along the branch, olives appear, then dawn */
+.aq-cover.is-go .aq-cover-hint {
+  opacity: 0;
+}
+
+.aq-cover.is-go .aq-tap,
+.aq-cover.is-go .aq-branch {
+  animation: none;
+}
+
+.aq-cover.is-go .aq-leaf {
+  transform: none;
+  transition: transform 0.65s cubic-bezier(0.3, 1.5, 0.5, 1) calc(0.15s + var(--i) * 0.1s);
+}
+
+.aq-cover.is-go .aq-olive {
+  transform: none;
+  transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) calc(0.15s + var(--i) * 0.1s);
+}
+
+.aq-cover.is-go .aq-dawn {
+  opacity: 1;
+  transition: opacity 0.7s ease 1.5s;
+}
+
+.aq-cover.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ───────── Hero ───────── */
+
+.aq-hero {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5rem 1.5rem 2.5rem;
+  text-align: center;
+}
+
+.aq-verse {
+  font-family: var(--tf-ar-verse);
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--aq-gold-ink);
+}
+
+.aq-ring {
+  position: relative;
+  display: grid;
+  width: min(84vw, 20rem);
+  aspect-ratio: 1;
+  place-items: center;
+  margin-block: 0.75rem 0.5rem;
+}
+
+.aq-wreath {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.aq-wreath-stem {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.aq-wreath .aq-leaf {
+  transform: scale(0) rotate(-20deg);
+}
+
+.aq-wreath .aq-olive {
+  transform: scale(0);
+}
+
+.aq-on .aq-wreath-stem {
+  animation: aq-draw 1.6s cubic-bezier(0.5, 0, 0.3, 1) 0.15s forwards;
+}
+
+.aq-on .aq-wreath .aq-leaf {
+  animation: aq-leaf-in 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) calc(0.35s + var(--i) * 0.09s) forwards;
+}
+
+.aq-on .aq-wreath .aq-olive {
+  animation: aq-leaf-in 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) calc(0.35s + var(--i) * 0.09s) forwards;
+}
+
+.aq-ring-text {
+  position: relative;
+  display: flex;
+  max-width: 62%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aq-ring-kicker {
+  font-size: 0.95rem;
+  color: var(--aq-muted);
+}
+
+.aq-name {
+  margin-top: 0.1rem;
+  font-family: var(--tf-ar-script);
+  font-size: clamp(2.4rem, 12vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  color: var(--aq-forest);
+}
+
+.aq-hosts {
+  margin-top: 0.75rem;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  color: var(--aq-muted);
+}
+
+.aq-date {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--aq-sage) 55%, transparent);
+  border-radius: 999px 0.5rem 999px 0.5rem;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: var(--tf-ar-display);
+  font-size: 1rem;
+}
+
+.aq-date-sep {
+  width: 5px;
+  height: 5px;
+  rotate: 45deg;
+  background: var(--aq-gold);
+}
+
+.aq-scroll {
+  margin-top: 1.5rem;
+  color: var(--aq-sage);
+}
+
+.aq-on .aq-scroll {
+  animation: aq-nudge 2.4s ease-in-out 4s 3;
+}
+
+.aq-line {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.aq-on .aq-line {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.9s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.aq-on .d0 { transition-delay: 0.1s; }
+.aq-on .d3 { transition-delay: 1.3s; }
+.aq-on .d4 { transition-delay: 1.6s; }
+.aq-on .d5 { transition-delay: 2.2s; }
+.aq-on .d6 { transition-delay: 2.5s; }
+.aq-on .d7 { transition-delay: 2.9s; }
+
+/* ───────── Sections ───────── */
+
+.aq-section {
+  padding: 3.25rem 1.5rem;
+}
+
+.aq-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--aq-gold-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.aq-kicker::before,
+.aq-kicker::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.aq-title {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: var(--tf-ar-display);
+  font-size: clamp(1.75rem, 7.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.aq-muted {
+  color: var(--aq-muted);
+}
+
+.aq-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.aq-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* intentions */
+.aq-intents {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 22rem;
+  margin: 1.9rem auto 0;
+}
+
+.aq-intent {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--aq-sage) 35%, transparent);
+  border-radius: 2rem 0.6rem 2rem 0.6rem;
+  background: color-mix(in srgb, var(--aq-card) 88%, transparent);
+  box-shadow: 0 10px 24px rgba(47, 66, 55, 0.06);
+}
+
+.aq-intent-icon {
+  grid-row: span 2;
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  place-items: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--aq-sage) 18%, transparent);
+  color: var(--aq-forest);
+}
+
+.aq-intent-title {
+  font-family: var(--tf-ar-script);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.aq-intent-body {
+  color: var(--aq-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* note */
+.aq-note {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.6rem 1.75rem;
+  border-radius: 1.5rem;
+  background: var(--aq-card);
+  box-shadow: 0 18px 40px rgba(47, 66, 55, 0.08);
+  text-align: center;
+}
+
+.aq-note-sprig {
+  position: absolute;
+  top: -0.9rem;
+  left: 50%;
+  translate: -50% 0;
+  padding-inline: 0.5rem;
+  background: var(--aq-paper);
+}
+
+.aq-note blockquote {
+  font-size: 1.1rem;
+  line-height: 2.05;
+  white-space: pre-line;
+}
+
+/* countdown band */
+.aq-band {
+  padding: 3.75rem 1.5rem 4rem;
+  background:
+    radial-gradient(80% 50% at 50% 0%, rgba(160, 196, 150, 0.2), transparent 70%),
+    linear-gradient(180deg, var(--aq-forest) 0%, var(--aq-forest-deep) 100%);
+  color: var(--aq-cream);
+}
+
+.aq-band .aq-kicker {
+  color: #d9c78f;
+}
+
+.aq-count {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+  max-width: 22rem;
+  margin: 1.75rem auto 0;
+}
+
+.aq-count-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.95rem 0.25rem 0.75rem;
+  border: 1px solid rgba(217, 199, 143, 0.4);
+  border-radius: 1.6rem 0.4rem 1.6rem 0.4rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.aq-count-num {
+  font-family: var(--tf-ar-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #e9d9a0;
+  font-variant-numeric: tabular-nums;
+}
+
+.aq-count-label {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--aq-cream) 82%, transparent);
+}
+
+.aq-count-placeholder {
+  height: 5.8rem;
+}
+
+.aq-today {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: var(--tf-ar-script);
+  font-size: 2rem;
+  color: #e9d9a0;
+}
+
+/* programme */
+.aq-programme {
+  display: grid;
+  max-width: 21rem;
+  margin: 1.75rem auto 0;
+}
+
+.aq-step {
+  display: grid;
+  grid-template-columns: 2.9rem 5.2rem 1fr;
+  align-items: center;
+  padding: 0.8rem 0.25rem;
+  border-bottom: 1px dashed color-mix(in srgb, var(--aq-sage) 40%, transparent);
+}
+
+.aq-step:last-child {
+  border-bottom: 0;
+}
+
+.aq-step-leaf svg {
+  display: block;
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+}
+
+.aq-step.is-in .aq-step-leaf svg {
+  transform: none;
+  transition: transform 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) 0.35s;
+}
+
+.aq-step-time {
+  font-family: var(--tf-ar-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--aq-gold-ink);
+}
+
+.aq-step-label {
+  font-size: 1.05rem;
+}
+
+/* venue */
+.aq-venue {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 1.6rem 1.6rem 2rem;
+  border: 1px solid color-mix(in srgb, var(--aq-sage) 35%, transparent);
+  border-radius: 4rem 1rem 4rem 1rem;
+  background: var(--aq-card);
+  box-shadow: 0 18px 44px rgba(47, 66, 55, 0.08);
+  text-align: center;
+}
+
+.aq-venue-sprig {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.aq-venue .aq-title {
+  font-size: 1.75rem;
+}
+
+.aq-venue-when {
+  margin-top: 1rem;
+  line-height: 1.9;
+}
+
+.aq-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.aq-btn {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.35rem;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.aq-btn:active {
+  transform: scale(0.97);
+}
+
+.aq-btn.is-ghost {
+  border: 1px solid color-mix(in srgb, var(--aq-forest) 40%, transparent);
+  background: transparent;
+  color: var(--aq-forest);
+}
+
+/* forms */
+.aq-form {
+  max-width: 24rem;
+  margin: 1.75rem auto 0;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--aq-sage) 30%, transparent);
+  border-radius: 1.4rem;
+  background: color-mix(in srgb, var(--aq-card) 92%, transparent);
+  box-shadow: 0 14px 34px rgba(47, 66, 55, 0.06);
+}
+
+.aq .field,
+.aq input,
+.aq textarea,
+.aq select {
+  border-color: color-mix(in srgb, var(--aq-sage) 40%, #dfe5d6);
+  background: #fff;
+}
+
+.aq .field:focus,
+.aq input:focus,
+.aq textarea:focus {
+  border-color: var(--aq-forest);
+  box-shadow: 0 0 0 3px rgba(110, 139, 106, 0.22);
+}
+
+/* closing */
+.aq-closing {
+  padding: 3.5rem 1.75rem 2rem;
+  text-align: center;
+}
+
+.aq-closing-mark {
+  display: inline-block;
+}
+
+.aq-dua {
+  margin-top: 0.75rem;
+  font-family: var(--tf-ar-verse);
+  font-size: 1.4rem;
+  line-height: 2.1;
+}
+
+.aq-closing-name {
+  margin-top: 0.9rem;
+  font-family: var(--tf-ar-script);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--aq-forest);
+}
+
+.aq-footer {
+  padding: 1.5rem 1.5rem 7.5rem;
+  text-align: center;
+  color: var(--aq-muted);
+  font-size: 0.85rem;
+}
+
+.aq-footer a {
+  font-family: var(--tf-ar-script);
+  font-size: 1.5rem;
+  color: var(--aq-ink);
+  text-decoration: none;
+}
+
+/* sticky CTA tint (StoryCta renders .wax-business outside the article) */
+.aq-page .wax-business a {
+  background: #3e5344;
+  color: #f3f5ef;
+}
+
+.aq-page .wax-business button {
+  color: #3e5344;
+}
+
+/* ───────── Keyframes ───────── */
+
+@keyframes aq-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes aq-sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+
+@keyframes aq-tap {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(62, 83, 68, 0.28); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(62, 83, 68, 0); }
+}
+
+@keyframes aq-leaf-in {
+  0% { transform: scale(0) rotate(-20deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes aq-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ───────── Still / reduced motion: final state, no movement ───────── */
+
+.aq.is-still .aq-line,
+.aq.is-still .aq-reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  animation: none;
+}
+
+.aq.is-still .aq-stem,
+.aq.is-still .aq-wreath-stem {
+  stroke-dashoffset: 0;
+  animation: none;
+}
+
+.aq.is-still .aq-wreath .aq-leaf,
+.aq.is-still .aq-wreath .aq-olive,
+.aq.is-still .aq-step-leaf svg {
+  transform: none;
+  animation: none;
+  transition: none;
+}
+
+.aq.is-still .aq-branch,
+.aq.is-still .aq-tap,
+.aq.is-still .aq-scroll {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aq .aq-line,
+  .aq .aq-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .aq .aq-stem,
+  .aq .aq-wreath-stem {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .aq .aq-wreath .aq-leaf,
+  .aq .aq-wreath .aq-olive,
+  .aq .aq-step-leaf svg {
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .aq .aq-branch,
+  .aq .aq-tap,
+  .aq .aq-scroll {
+    animation: none;
+  }
+
+  .aq-cover {
+    transition: opacity 0.2s;
+  }
+}

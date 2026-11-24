@@ -126,6 +126,18 @@ export function RingBoxOpening(props: Props) {
   return <Cover kind="ringbox" {...props} />;
 }
 
+export function PromiseRibbonOpening(props: Props) {
+  return <Cover kind="ribbon" {...props} />;
+}
+
+export function GoldenBalloonsOpening(props: Props) {
+  return <Cover kind="balloons" light {...props} />;
+}
+
+export function ZaffaCandlesOpening(props: Props) {
+  return <Cover kind="shamadan" {...props} />;
+}
+
 export function GiftBurstOpening(props: Props) {
   return <Cover kind="gift" {...props} />;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LogoMark } from "@/components/site";
 import { useOrderForm } from "@/components/order/hooks/useOrderForm";
 
 const occasions = ["فرح", "خطوبة", "كتب كتاب", "عيد ميلاد", "أنيفرسري", "حاجة تانية"] as const;
@@ -24,7 +25,16 @@ const styles = [
   { value: "شباك اللافندر", title: "شباك اللافندر", body: "شباك قوسي على حقل بنفسجي", href: "/invite/theme-lav" },
   { value: "باب المشربية", title: "باب المشربية", body: "لكتب الكتاب", href: "/invite/theme-mash" },
   { value: "باب القمر", title: "باب القمر", body: "باب وردي تحت القمر", href: "/invite/theme-moon" },
+  { value: "فوانيس السبوع", title: "فوانيس السبوع", body: "للسبوع · دقّ الهون", href: "/invite/sebou-adam" },
+  { value: "غصن الزيتون", title: "غصن الزيتون", body: "للعقيقة · الأوراق بتتفتح", href: "/invite/aqiqah-mariam" },
+  { value: "شمعدان الزفة", title: "شمعدان الزفة", body: "شموع بتنوّر واحدة واحدة", href: "/invite/theme-zaffa" },
+  { value: "لقطة الخطوبة", title: "لقطة الخطوبة", body: "للخطوبة · صورة بتظهر", href: "/invite/nour-karim" },
   { value: "علبة الدبل", title: "علبة الدبل", body: "للخطوبة", href: "/invite/theme-box" },
+  { value: "خيط الوعد", title: "خيط الوعد", body: "للخطوبة · شريطة بتتفك", href: "/invite/theme-promise" },
+  { value: "بالونات الذهب", title: "بالونات الذهب", body: "لعيد ميلاد كبير · أسود وذهب", href: "/invite/theme-balloons" },
+  { value: "شموع العيد", title: "شموع العيد", body: "لعيد ميلاد · الشموع بتتطفي", href: "/invite/birthday-lina" },
+  { value: "حفلة ألوان", title: "حفلة ألوان", body: "لعيد ميلاد · بالونات بتفرقع", href: "/invite/birthday-youssef" },
+  { value: "ألوان السبوع", title: "ألوان السبوع", body: "للسبوع · غربال الملبّس", href: "/invite/sebou-festival-sara" },
   { value: "الهدية", title: "الهدية والكونفيتي", body: "لعيد الميلاد", href: "/invite/theme-gift" },
   { value: "مش متأكد", title: "مش متأكد", body: "اقترحوا عليا", href: "" },
 ] as const;
@@ -44,17 +54,7 @@ export function OrderForm({ initialPackage }: Props) {
       <div className="wrap">
         <header>
           <Link className="logo" href="/" aria-label="Noqatni">
-            <svg viewBox="0 0 64 44" aria-hidden>
-              <path
-                d="M3 4 L32 30 L61 4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="32" cy="30" r="11" fill="#a3253a" />
-            </svg>
+            <LogoMark size={36} />
             <span className="a">نقطني</span>
             <span className="e">Noqatni</span>
           </Link>

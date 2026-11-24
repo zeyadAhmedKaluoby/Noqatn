@@ -1,18 +1,42 @@
-import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 
-export function LogoMark({ size = 44 }: { size?: number }) {
+/** The bowl of ن, a crescent cupping its own dot. Shared with public/brand/logo.svg. */
+export const NOON_BOWL_PATH =
+  "M9 27C9 46 20 56 32 56C44 56 55 46 55 27C52 41.5 43 49.5 32 49.5C21 49.5 12 41.5 9 27Z";
+
+/**
+ * Noqatni mark: the letter ن whose dot (نقطة) is a wax seal.
+ * The bowl takes `currentColor`, so it follows the surrounding ink.
+ */
+export function LogoMark({
+  size = 44,
+  seal = "#9b2236",
+  className,
+}: {
+  size?: number;
+  seal?: string;
+  className?: string;
+}) {
   return (
-    <Image
-      src="/brand/logo.png"
-      alt=""
+    <svg
+      viewBox="0 0 64 64"
       width={size}
       height={size}
-      priority={size >= 40}
-      className={`rounded-full object-cover ${size >= 40 ? "shadow-[0_6px_16px_rgba(154,115,68,0.28)]" : ""}`}
-      style={{ width: size, height: size }}
-    />
+      className={className}
+      style={{ flex: "none" }}
+      aria-hidden
+      focusable="false"
+    >
+      <path d={NOON_BOWL_PATH} fill="currentColor" />
+      <circle cx="32" cy="25" r="9" fill={seal} />
+      {size >= 32 ? (
+        <>
+          <circle cx="29" cy="22" r="3.6" fill="#fff" opacity="0.16" />
+          <circle cx="32" cy="25" r="5.6" fill="none" stroke="#fff" strokeOpacity="0.28" strokeWidth="0.9" />
+        </>
+      ) : null}
+    </svg>
   );
 }
 

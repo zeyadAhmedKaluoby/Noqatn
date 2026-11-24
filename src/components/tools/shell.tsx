@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { LogoMark } from "@/components/site";
 import { SITE } from "@/lib/site";
 
 export function ToolShell({
@@ -16,17 +17,7 @@ export function ToolShell({
       <div className="wrap">
         <header className="tool-top">
           <Link className="logo" href="/" aria-label={SITE.brandEn}>
-            <svg viewBox="0 0 64 44" aria-hidden>
-              <path
-                d="M3 4 L32 30 L61 4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="32" cy="30" r="11" fill="#a3253a" />
-            </svg>
+            <LogoMark size={36} />
             <span className="a">{SITE.brandAr}</span>
             <span className="e">{SITE.brandEn}</span>
           </Link>

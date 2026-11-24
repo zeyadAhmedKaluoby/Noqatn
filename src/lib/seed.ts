@@ -28,6 +28,8 @@ function themeEvent(input: {
   venueName?: string;
   address?: string;
   schedule?: { time: string; label: string }[];
+  photo?: string;
+  hosts?: string[];
 }) {
   return event({
     slug: input.slug,
@@ -36,8 +38,8 @@ function themeEvent(input: {
     type: input.type,
     templateKey: input.templateKey,
     details: {
-      photo: "",
-      hosts: [],
+      photo: input.photo ?? "",
+      hosts: input.hosts ?? [],
       honoreeNames: input.names,
       date: input.date ?? "2027-05-21",
       startTime: input.startTime ?? "20:00",
@@ -234,6 +236,69 @@ const themeDemos: Parameters<typeof themeEvent>[0][] = [
   { slug: "theme-mash", token: "demo-mash", title: "سيف و ريم", type: "WEDDING", templateKey: "mashrabiya-door", names: ["سيف", "ريم"], wording: "باب مشربية يُفتح على نور زفاف سيف وريم." },
   { slug: "theme-moon", token: "demo-moon", title: "مراد و لين", type: "WEDDING", templateKey: "moon-door", names: ["مراد", "لين"], wording: "باب وقمر لليلة زفاف مراد ولين." },
   { slug: "theme-box", token: "demo-box", title: "سلمى و عمر", type: "ENGAGEMENT", templateKey: "ring-box", names: ["سلمى", "عمر"], wording: "علبة الدبل تُفتح على خطوبة سلمى وعمر.", song: "waltz" },
+  {
+    slug: "theme-promise",
+    token: "demo-promise",
+    title: "مريم و يوسف",
+    type: "ENGAGEMENT",
+    templateKey: "promise-ribbon",
+    names: ["مريم", "يوسف"],
+    wording: "بعد ما قرأنا الفاتحة واتفقت القلوب،\nحابين تكونوا أول ناس تشاركنا الوعد.",
+    date: "2027-04-15",
+    startTime: "20:00",
+    venueName: "قاعة اللؤلؤة",
+    address: "المعادي، القاهرة",
+    song: "waltz",
+    schedule: [
+      { time: "20:00", label: "استقبال الضيوف" },
+      { time: "20:45", label: "دخول العروسين" },
+      { time: "21:15", label: "لبس الدبل" },
+      { time: "22:00", label: "تورتة وسهرة" },
+    ],
+  },
+  {
+    slug: "theme-zaffa",
+    token: "demo-zaffa",
+    title: "فريدة و آدم",
+    type: "WEDDING",
+    templateKey: "zaffa-candles",
+    names: ["فريدة", "آدم"],
+    hosts: ["آل الشريف", "آل منصور"],
+    wording: "على نور الشموع وبركة الدعاء\nبنبدأ حكايتنا… ومش هتحلى غير بيكم.",
+    date: "2027-06-24",
+    startTime: "20:30",
+    venueName: "قاعة الماسة",
+    address: "مصر الجديدة، القاهرة",
+    song: "canon",
+    schedule: [
+      { time: "20:30", label: "استقبال الضيوف" },
+      { time: "21:00", label: "الزفة" },
+      { time: "21:30", label: "كتب الكتاب" },
+      { time: "22:15", label: "الرقصة الأولى" },
+      { time: "23:00", label: "العشاء" },
+    ],
+  },
+  {
+    slug: "theme-balloons",
+    token: "demo-balloons",
+    title: "عيد ميلاد سلمى",
+    type: "BIRTHDAY",
+    templateKey: "golden-balloons",
+    names: ["سلمى"],
+    wording: "تلاتين سنة ضحك وحكايات،\nوالليلة عايزاكم كلكم حواليا.",
+    date: "2027-02-12",
+    startTime: "21:00",
+    venueName: "روف ذا نايل",
+    address: "جاردن سيتي، القاهرة",
+    song: "pizzicato",
+    photo: "/images/occasion-birthday.jpg",
+    schedule: [
+      { time: "21:00", label: "استقبال ومشروبات" },
+      { time: "21:45", label: "ديجي ورقص" },
+      { time: "22:30", label: "التورتة والأمنية" },
+      { time: "23:00", label: "سهرة لآخر الليل" },
+    ],
+  },
   { slug: "theme-gift", token: "demo-gift", title: "عيد ميلاد نور", type: "BIRTHDAY", templateKey: "gift-burst", names: ["نور"], wording: "هدية تُفتح على عيد ميلاد نور.", song: "pizzicato" },
 ];
 

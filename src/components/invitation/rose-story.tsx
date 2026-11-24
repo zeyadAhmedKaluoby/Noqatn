@@ -307,8 +307,9 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
     const node = ref.current;
     if (!node) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
+      // next frame rather than synchronously inside the effect
+      const frame = window.requestAnimationFrame(() => setShown(true));
+      return () => window.cancelAnimationFrame(frame);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {

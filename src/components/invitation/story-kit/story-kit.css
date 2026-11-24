@@ -1,0 +1,37 @@
+/* ─────────────────────────────────────────────────────────────
+   Story kit: shared styles.
+
+   .story-dark makes the shared RSVP / message / gift forms readable on a dark
+   page. Without it they render cream text on white fields. A dark template adds
+   the class to its root and sets the variables below on that same element:
+
+     --story-line      border colour of fields
+     --story-field-bg  field background
+     --story-field-ink field text colour
+     --story-accent    focus border colour
+     --story-focus     focus ring colour
+   ───────────────────────────────────────────────────────────── */
+
+.story-dark .field,
+.story-dark input,
+.story-dark textarea,
+.story-dark select {
+  border-color: var(--story-line);
+  background: var(--story-field-bg);
+  color: var(--story-field-ink);
+}
+
+.story-dark .field:focus,
+.story-dark input:focus,
+.story-dark textarea:focus {
+  border-color: var(--story-accent);
+  box-shadow: 0 0 0 3px var(--story-focus);
+}
+
+.story-dark .bg-white\/50 {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.story-dark .text-red-700 {
+  color: #ffa597;
+}

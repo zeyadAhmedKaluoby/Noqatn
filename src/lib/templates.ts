@@ -21,6 +21,7 @@ export type OpeningKind =
   | "garden"
   | "rings"
   | "lanterns"
+  | "sieve"
   | "olive"
   | "candles"
   | "confetti"
@@ -44,7 +45,35 @@ export type OpeningKind =
   | "mashrabiya"
   | "moon"
   | "ringbox"
+  | "ribbon"
+  | "balloons"
+  | "shamadan"
   | "gift";
+
+/**
+ * Font roles a template can set. Story CSS uses these instead of naming a font,
+ * so a template changes its typography by overriding a role, not by editing CSS.
+ */
+export type TemplateFonts = {
+  /** Arabic names and big heading moments (calligraphic). */
+  arScript: string;
+  /** Arabic display headings and numerals. */
+  arDisplay: string;
+  /** Verses, duaa and formal wording. */
+  arVerse: string;
+  /** Body text, labels and forms. */
+  body: string;
+  /** Latin script accents such as "Happy Birthday". */
+  latinScript: string;
+};
+
+export const DEFAULT_FONTS: TemplateFonts = {
+  arScript: "var(--font-ruqaa), serif",
+  arDisplay: "var(--font-messiri), serif",
+  arVerse: "var(--font-amiri), serif",
+  body: "var(--font-alexandria), var(--font-cairo), system-ui, sans-serif",
+  latinScript: "var(--font-pinyon), var(--font-script), cursive",
+};
 
 export type TemplateDef = {
   key: TemplateKey;
@@ -54,6 +83,8 @@ export type TemplateDef = {
   opening: OpeningKind;
   decoration: "petals" | "sparkles" | "confetti" | "none";
   colors: TemplateColors;
+  /** Override any font role; the rest use DEFAULT_FONTS. */
+  fonts?: Partial<TemplateFonts>;
 };
 
 export const EVENT_TYPES: Record<
@@ -135,6 +166,7 @@ export const TEMPLATES: TemplateDef[] = [
     eventTypes: ["WEDDING"],
     opening: "minimal",
     decoration: "none",
+    fonts: { arScript: "var(--font-messiri), serif" },
     colors: {
       bg: "#f6f5f2",
       ink: "#22211e",
@@ -235,6 +267,10 @@ export const TEMPLATES: TemplateDef[] = [
     eventTypes: ["BIRTHDAY"],
     opening: "candles",
     decoration: "confetti",
+    fonts: {
+      arScript: "var(--font-poster), var(--font-cairo), sans-serif",
+      arDisplay: "var(--font-poster), var(--font-cairo), sans-serif",
+    },
     colors: {
       bg: "#fff1f7",
       ink: "#351848",
@@ -255,6 +291,10 @@ export const TEMPLATES: TemplateDef[] = [
     eventTypes: ["BIRTHDAY"],
     opening: "confetti",
     decoration: "confetti",
+    fonts: {
+      arScript: "var(--font-poster), var(--font-cairo), sans-serif",
+      arDisplay: "var(--font-poster), var(--font-cairo), sans-serif",
+    },
     colors: {
       bg: "#fff8d4",
       ink: "#1d1a4a",
@@ -273,7 +313,7 @@ export const TEMPLATES: TemplateDef[] = [
     name: "ألوان السبوع",
     brief: "فوانيس ملونة وقصاصات. ليلة سبوع مرحة بدل الهدوء الذهبي.",
     eventTypes: ["SEBOU"],
-    opening: "lanterns",
+    opening: "sieve",
     decoration: "confetti",
     colors: {
       bg: "#eafff8",
@@ -295,6 +335,7 @@ export const TEMPLATES: TemplateDef[] = [
     eventTypes: ["WEDDING"],
     opening: "poster",
     decoration: "none",
+    fonts: { arScript: "var(--font-poster), var(--font-cairo), sans-serif" },
     colors: {
       bg: "#0c0c0c",
       ink: "#f6edd8",
@@ -669,6 +710,26 @@ export const TEMPLATES: TemplateDef[] = [
     },
   },
   {
+    key: "zaffa-candles",
+    name: "شمعدان الزفة",
+    brief: "ليل برقوقي ونحاس عتيق. الضيف يلمس الشمعدان فتنوّر الشموع واحدة واحدة على ورق عاجي.",
+    eventTypes: ["WEDDING"],
+    opening: "shamadan",
+    decoration: "none",
+    colors: {
+      bg: "#f8f0e3",
+      ink: "#3b2417",
+      gold: "#c08a3e",
+      muted: "#7a5d48",
+      card: "#fffaf2",
+      accent: "#2a1720",
+      stage: "#150b10",
+      petal: "#e6c27e",
+      button: "#3b2417",
+      buttonText: "#f8f0e3",
+    },
+  },
+  {
     key: "ring-box",
     name: "علبة الدبل",
     brief: "علبة تُفتح على دبلتين للخطوبة.",
@@ -689,12 +750,56 @@ export const TEMPLATES: TemplateDef[] = [
     },
   },
   {
+    key: "promise-ribbon",
+    name: "خيط الوعد",
+    brief: "نبيتي وذهب شامبين وشريطة وردي. الضيف يفك الفيونكة والدبلتين يكتملوا.",
+    eventTypes: ["ENGAGEMENT"],
+    opening: "ribbon",
+    decoration: "none",
+    colors: {
+      bg: "#fbf4ee",
+      ink: "#4a1a26",
+      gold: "#b98a56",
+      muted: "#7d5560",
+      card: "#fffaf6",
+      accent: "#e8b4bc",
+      stage: "#2e0b13",
+      petal: "#f1cdd3",
+      button: "#5e1f2e",
+      buttonText: "#fbf4ee",
+    },
+  },
+  {
+    key: "golden-balloons",
+    name: "بالونات الذهب",
+    brief: "أسود وذهب شامبين. الضيف يفرقع البالونة الدهبي فتطير القصاصات، والليلة تبدأ.",
+    eventTypes: ["BIRTHDAY"],
+    opening: "balloons",
+    decoration: "none",
+    colors: {
+      bg: "#0f0d0b",
+      ink: "#f5ead6",
+      gold: "#d9b46a",
+      muted: "#c8b89a",
+      card: "#1a1612",
+      accent: "#d8a08f",
+      stage: "#070605",
+      petal: "#f3e3bf",
+      button: "#d9b46a",
+      buttonText: "#15110c",
+    },
+  },
+  {
     key: "gift-burst",
     name: "الهدية",
     brief: "علبة هدية تُفتح والقصاصات تنزل.",
     eventTypes: ["BIRTHDAY"],
     opening: "gift",
     decoration: "confetti",
+    fonts: {
+      arScript: "var(--font-poster), var(--font-cairo), sans-serif",
+      arDisplay: "var(--font-poster), var(--font-cairo), sans-serif",
+    },
     colors: {
       bg: "#fff4ea",
       ink: "#3a2148",
@@ -720,7 +825,13 @@ export function templatesFor(type: EventType) {
 
 export function themeVars(template: TemplateDef): CSSProperties {
   const colors = template.colors;
+  const fonts = { ...DEFAULT_FONTS, ...template.fonts };
   return {
+    "--tf-ar-script": fonts.arScript,
+    "--tf-ar-display": fonts.arDisplay,
+    "--tf-ar-verse": fonts.arVerse,
+    "--tf-body": fonts.body,
+    "--tf-latin-script": fonts.latinScript,
     "--bg": colors.bg,
     "--ink": colors.ink,
     "--gold": colors.gold,

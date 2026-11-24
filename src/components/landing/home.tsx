@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ThemePair } from "@/components/invitation/theme-art";
-import { SiteFooter } from "@/components/site";
+import { LogoMark, SiteFooter } from "@/components/site";
 import { ORDER_HELLO, SITE, whatsappHref } from "@/lib/site";
 import { getTemplate } from "@/lib/templates";
 import type { TemplateKey } from "@/lib/types";
@@ -527,6 +527,56 @@ const gallery: {
     bodyEn: "A pink door lit by lanterns. It opens onto a terrace under the moon.",
   },
   {
+    slug: "sebou-adam",
+    key: "sebou-lanterns",
+    tag: "سبوع · دقّ الهون وفوانيس بتنوّر",
+    tagEn: "Sebou · strike the mortar, light the lanterns",
+    names: "آدم",
+    namesEn: "Adam",
+    body: "الضيف يدق الهون، والفوانيس تنوّر واحد ورا التاني، والملبّس يتنثر، وبعدها تفاصيل السبوع.",
+    bodyEn: "The guest strikes the mortar, the lanterns light one by one and sugared sweets scatter, then the sebou details.",
+  },
+  {
+    slug: "aqiqah-mariam",
+    key: "aqiqah-olive",
+    tag: "عقيقة · غصن زيتون بيتفتح",
+    tagEn: "Aqiqah · an olive branch that unfolds",
+    names: "مريم",
+    namesEn: "Mariam",
+    body: "الضيف يلمس الغصن فتتفتح الأوراق، وإكليل زيتون يتكوّن حول اسم المولود، وبعدها تفاصيل اليوم والدعاء.",
+    bodyEn: "The guest touches the branch, the leaves unfold, and an olive wreath forms around the baby's name.",
+  },
+  {
+    slug: "layla-omar",
+    key: "elegant-floral",
+    tag: "فرح · ظرف وبتلات",
+    tagEn: "Wedding · an envelope and petals",
+    names: "ليلى و عمر",
+    namesEn: "Layla & Omar",
+    body: "الضيف يكسر ختم الظرف، الغطا يتفتح والكارت يطلع، والبتلات تنزل بهدوء.",
+    bodyEn: "The guest breaks the seal, the flap opens, the card rises, and petals drift down.",
+  },
+  {
+    slug: "theme-zaffa",
+    key: "zaffa-candles",
+    tag: "فرح · شمعدان الزفة",
+    tagEn: "Wedding · the zaffa candelabra",
+    names: "فريدة و آدم",
+    namesEn: "Farida & Adam",
+    body: "شمعدان نحاس في ليل برقوقي. الضيف يلمسه والشموع تنوّر واحدة واحدة، وبعدها قوس الدعوة.",
+    bodyEn: "A brass candelabra on a plum night. The guest touches it, the candles light one by one, then the arch opens.",
+  },
+  {
+    slug: "nour-karim",
+    key: "romantic-engagement",
+    tag: "خطوبة · صورة بتظهر",
+    tagEn: "Engagement · a photograph that develops",
+    names: "نور و كريم",
+    namesEn: "Nour & Karim",
+    body: "الضيف يهز الصورة الأبيض فتظهر لقطة العروسين، وبعدها حكايتهم في ثلاث لقطات وتفاصيل السهرة.",
+    bodyEn: "The guest shakes the blank photo and the couple's picture develops, then their story in three snapshots and the evening details.",
+  },
+  {
     slug: "theme-box",
     key: "ring-box",
     tag: "خطوبة · علبة دبل بتتفتح",
@@ -537,14 +587,64 @@ const gallery: {
     bodyEn: "The guest opens the box and finds the rings, then the evening plan and a reply.",
   },
   {
+    slug: "theme-promise",
+    key: "promise-ribbon",
+    tag: "خطوبة · شريطة بتتفك",
+    tagEn: "Engagement · a ribbon that unties",
+    names: "مريم و يوسف",
+    namesEn: "Mariam & Youssef",
+    body: "جواب مربوط بفيونكة ساتان. الضيف يفكها، والدبلتين يترسموا ويكتملوا.",
+    bodyEn: "A letter tied with a satin bow. The guest unties it and two rings draw themselves together.",
+  },
+  {
+    slug: "theme-balloons",
+    key: "golden-balloons",
+    tag: "عيد ميلاد · بالونة بتفرقع",
+    tagEn: "Birthday · a balloon that pops",
+    names: "سلمى",
+    namesEn: "Salma",
+    body: "ليلة أسود وذهب. الضيف يفرقع البالونة الدهبي والقصاصات تطير، وبعدها تفاصيل السهرة.",
+    bodyEn: "A black-and-gold night. The guest pops the gold balloon, confetti flies, then the evening unfolds.",
+  },
+  {
+    slug: "birthday-lina",
+    key: "birthday-candles",
+    tag: "عيد ميلاد · شموع بتتطفي",
+    tagEn: "Birthday · candles you blow out",
+    names: "لينا",
+    namesEn: "Lina",
+    body: "الضيف يتمنّى أمنية وينفخ الشموع، الدخان يطلع والقصاصات تنزل، وبعدها تفاصيل الحفلة.",
+    bodyEn: "The guest makes a wish and blows out the candles, smoke curls up and confetti falls, then the party details.",
+  },
+  {
+    slug: "birthday-youssef",
+    key: "birthday-confetti",
+    tag: "عيد ميلاد · بالونات بتفرقع",
+    tagEn: "Birthday · balloons that pop",
+    names: "يوسف",
+    namesEn: "Youssef",
+    body: "ست بالونات ملونة، والضيف يفرقعها واحدة واحدة والقصاصات تملا الشاشة.",
+    bodyEn: "Six colourful balloons that the guest pops one by one while confetti fills the screen.",
+  },
+  {
+    slug: "sebou-festival-sara",
+    key: "sebou-festival",
+    tag: "سبوع · غربال الملبّس",
+    tagEn: "Sebou · the sweets sieve",
+    names: "سارة",
+    namesEn: "Sara",
+    body: "الضيف يهز الغربال والملبّس يتنثر، في سبوع ملوّن ومبهج.",
+    bodyEn: "The guest shakes the sieve and the sweets scatter, in a bright and colourful sebou.",
+  },
+  {
     slug: "theme-gift",
     key: "gift-burst",
-    tag: "عيد ميلاد · هدية بتفرقع",
-    tagEn: "Birthday · a gift that bursts",
+    tag: "عيد ميلاد · هدية بتتفتح",
+    tagEn: "Birthday · a gift that opens",
     names: "نور",
     namesEn: "Nour",
-    body: "الضيف يفتح الهدية والقصاصات تنزل. ويقدر يقترح أغنية مع الرد.",
-    bodyEn: "The guest opens the gift and confetti falls, then can suggest a song with the reply.",
+    body: "الضيف يفك الشريطة، والغطا يطير، وكارت الدعوة يطلع من جوه الهدية والقصاصات في السما.",
+    bodyEn: "The guest unties the ribbon, the lid flies off, and the invitation card rises from the gift in a burst of confetti.",
   },
 ];
 
@@ -564,7 +664,7 @@ export function LandingHome() {
         <header className="site wrap">
           <div className="bar">
             <Link className="logo" href="/" aria-label="Noqatni">
-              <SealMark />
+              <LogoMark size={36} className="mark" />
               <span className="a">نقطني</span>
               <span className="e">Noqatni</span>
             </Link>
@@ -935,29 +1035,6 @@ function ClosePhone({ copyLabel, copiedLabel }: { copyLabel: string; copiedLabel
         {copied ? copiedLabel : copyLabel}
       </button>
     </div>
-  );
-}
-
-function SealMark() {
-  return (
-    <svg className="mark" viewBox="0 0 64 44" aria-hidden>
-      <path
-        d="M3 4 L32 30 L61 4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="32" cy="30" r="11" fill="url(#noqatni-seal)" />
-      <defs>
-        <radialGradient id="noqatni-seal" cx="0.38" cy="0.32" r="0.75">
-          <stop offset="0" stopColor="#d0566a" />
-          <stop offset="0.5" stopColor="#a3253a" />
-          <stop offset="1" stopColor="#5e1220" />
-        </radialGradient>
-      </defs>
-    </svg>
   );
 }
 

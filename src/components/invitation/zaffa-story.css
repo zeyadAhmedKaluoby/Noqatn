@@ -1,0 +1,819 @@
+/* ─────────────────────────────────────────────────────────────
+   شمعدان الزفة · Zaffa Candelabra — wedding
+   Plum night, antique brass, candlelight on ivory paper.
+   Scoped under .zf / .zf-page; keyframes prefixed zf-.
+   ───────────────────────────────────────────────────────────── */
+
+.zf {
+  --zf-plum: #2a1720;
+  --zf-plum-deep: #150b10;
+  --zf-paper: #f8f0e3;
+  --zf-card: #fffaf2;
+  --zf-ink: #3b2417;
+  --zf-muted: #7a5d48;
+  --zf-brass: #c08a3e;
+  --zf-brass-ink: #8a5f26;
+  --zf-brass-hi: #e6c27e;
+  --zf-cream: #f6e9d2;
+  position: relative;
+  background:
+    radial-gradient(110% 38% at 50% 0%, rgba(255, 196, 120, 0.28), transparent 70%),
+    var(--zf-paper);
+  color: var(--zf-ink);
+  font-family: var(--tf-body);
+}
+
+/* ───────── Cover ───────── */
+
+.zf-cover {
+  position: fixed;
+  inset-block: 0;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  width: min(100%, 480px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+  transform: translateX(-50%);
+  color: var(--zf-cream);
+  text-align: center;
+  transition: opacity 0.7s ease;
+}
+
+.zf-night,
+.zf-glow,
+.zf-dawn {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.zf-night {
+  z-index: 0;
+  background:
+    radial-gradient(60% 30% at 50% 58%, rgba(192, 138, 62, 0.12), transparent 70%),
+    linear-gradient(180deg, var(--zf-plum) 0%, var(--zf-plum-deep) 100%);
+}
+
+.zf-night::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image: radial-gradient(rgba(246, 233, 210, 0.25) 0.6px, transparent 0.8px);
+  background-size: 9px 9px;
+}
+
+.zf-glow {
+  z-index: 0;
+  background: radial-gradient(55% 40% at 50% 56%, rgba(255, 196, 110, 0.55), rgba(255, 150, 60, 0.18) 45%, transparent 75%);
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.zf-dawn {
+  z-index: 3;
+  background:
+    radial-gradient(70% 45% at 50% 50%, #fff3dc, transparent 80%),
+    var(--zf-paper);
+  opacity: 0;
+}
+
+.zf-cover > :not(.zf-night, .zf-glow, .zf-dawn) {
+  position: relative;
+  z-index: 1;
+}
+
+.zf-cover-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--zf-brass-hi);
+  font-size: 0.95rem;
+}
+
+.zf-cover-kicker::before,
+.zf-cover-kicker::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.zf-cover-names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.5rem;
+  max-width: 100%;
+  margin-top: 0.6rem;
+  font-family: var(--tf-ar-script);
+  font-size: clamp(2.1rem, 10vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.zf-amp {
+  font-size: 0.6em;
+  color: var(--zf-brass);
+}
+
+.zf-cover-art {
+  display: block;
+  width: min(66%, 240px);
+  margin-top: 1rem;
+}
+
+.zf-shamadan {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.45));
+}
+
+.zf-candle .zf-fire,
+.zf-candle .zf-halo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.zf-candle .zf-halo {
+  transform-origin: 50% 50%;
+}
+
+.zf-cover-date {
+  margin-top: 1rem;
+  color: color-mix(in srgb, var(--zf-cream) 75%, transparent);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+}
+
+.zf-cover-hint {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+  color: color-mix(in srgb, var(--zf-cream) 88%, transparent);
+  font-size: 0.95rem;
+  transition: opacity 0.4s;
+}
+
+.zf-tap {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--zf-brass-hi) 60%, transparent);
+  border-radius: 999px;
+  background: rgba(230, 194, 126, 0.08);
+  color: var(--zf-brass-hi);
+  animation: zf-tap 2.2s ease-in-out infinite;
+}
+
+/* opening: candles ignite in order, light grows, paper fades in */
+.zf-cover.is-go .zf-cover-hint,
+.zf-cover.is-go .zf-cover-date {
+  opacity: 0;
+}
+
+.zf-cover.is-go .zf-tap {
+  animation: none;
+}
+
+.zf-cover.is-go .zf-fire {
+  animation: zf-ignite 0.55s cubic-bezier(0.3, 1.4, 0.5, 1) calc(0.15s + var(--i) * 0.28s) forwards;
+}
+
+.zf-cover.is-go .zf-halo {
+  animation: zf-halo 0.7s ease-out calc(0.2s + var(--i) * 0.28s) forwards;
+}
+
+.zf-cover.is-go .zf-glow {
+  opacity: 1;
+  transform: scale(1.25);
+  transition: opacity 1.2s ease 0.35s, transform 1.6s ease 0.35s;
+}
+
+.zf-cover.is-go .zf-dawn {
+  opacity: 1;
+  transition: opacity 0.75s ease 1.5s;
+}
+
+.zf-cover.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ───────── Hero ───────── */
+
+.zf-hero {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4.75rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.zf-arch {
+  position: relative;
+  width: 100%;
+  max-width: 21.5rem;
+  min-height: 30rem;
+  padding: 5.25rem 1.75rem 2.5rem;
+}
+
+.zf-arch-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.zf-arch-line path {
+  fill: none;
+  stroke: var(--zf-brass);
+  stroke-width: 1.3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.zf-arch-line path + path {
+  stroke-width: 0.7;
+  opacity: 0.7;
+}
+
+.zf-on .zf-arch-line path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s cubic-bezier(0.5, 0, 0.3, 1) 0.15s;
+}
+
+.zf-on .zf-arch-line path + path {
+  transition-delay: 0.4s;
+}
+
+.zf-arch-crown {
+  position: absolute;
+  top: -1.9rem;
+  left: 50%;
+  display: grid;
+  width: 4.2rem;
+  height: 4.2rem;
+  place-items: center;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: var(--zf-paper);
+  color: var(--zf-brass);
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.zf-on .zf-arch-crown {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease 1.4s, transform 0.8s cubic-bezier(0.3, 1.4, 0.5, 1) 1.4s;
+}
+
+.zf-mini-fire {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.zf-on .zf-mini-fire,
+.zf-closing-mark.is-in .zf-mini-fire {
+  animation: zf-flicker 1.4s ease-in-out 1.8s 5 alternate;
+}
+
+.zf-basmala {
+  font-family: var(--tf-ar-verse);
+  font-size: 1.05rem;
+  color: var(--zf-muted);
+}
+
+.zf-verse {
+  margin-top: 0.5rem;
+  font-family: var(--tf-ar-verse);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: var(--zf-brass-ink);
+}
+
+.zf-hosts {
+  margin-top: 1rem;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  color: var(--zf-muted);
+}
+
+.zf-names {
+  margin-top: 1rem;
+  font-family: var(--tf-ar-script);
+  font-size: clamp(2.6rem, 12vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.zf-names-amp {
+  font-size: 0.5em;
+  line-height: 1.5;
+  color: var(--zf-brass);
+}
+
+.zf-hero-copy {
+  margin-top: 1.1rem;
+  font-size: 1.02rem;
+  color: var(--zf-muted);
+}
+
+.zf-date {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--zf-brass) 40%, transparent);
+  font-family: var(--tf-ar-display);
+  font-size: 1rem;
+}
+
+.zf-date-sep {
+  width: 5px;
+  height: 5px;
+  rotate: 45deg;
+  background: var(--zf-brass);
+}
+
+.zf-scroll {
+  margin-top: 1.5rem;
+  color: var(--zf-brass);
+}
+
+.zf-on .zf-scroll {
+  animation: zf-nudge 2.4s ease-in-out 4s 3;
+}
+
+.zf-line {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.zf-on .zf-line {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.9s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.zf-on .d1 { transition-delay: 0.5s; }
+.zf-on .d2 { transition-delay: 0.85s; }
+.zf-on .d3 { transition-delay: 1.2s; }
+.zf-on .d4 { transition-delay: 1.55s; }
+.zf-on .d5 { transition-delay: 1.75s; }
+.zf-on .d6 { transition-delay: 1.95s; }
+.zf-on .d7 { transition-delay: 2.3s; }
+.zf-on .d8 { transition-delay: 2.6s; }
+
+/* ───────── Sections ───────── */
+
+.zf-section {
+  padding: 3.25rem 1.5rem;
+}
+
+.zf-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--zf-brass-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.zf-kicker::before,
+.zf-kicker::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.zf-title {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: var(--tf-ar-script);
+  font-size: clamp(2rem, 9vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.zf-muted {
+  color: var(--zf-muted);
+}
+
+.zf-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.zf-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* brass corner brackets */
+.zf-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  color: var(--zf-brass);
+}
+
+.zf-corner.is-ts { top: 8px; left: 8px; }
+.zf-corner.is-te { top: 8px; right: 8px; transform: scaleX(-1); }
+.zf-corner.is-bs { bottom: 8px; left: 8px; transform: scaleY(-1); }
+.zf-corner.is-be { bottom: 8px; right: 8px; transform: scale(-1, -1); }
+
+/* owner's note */
+.zf-note {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 2.25rem 1.75rem;
+  background: var(--zf-card);
+  box-shadow: 0 18px 40px rgba(59, 36, 23, 0.08);
+  text-align: center;
+}
+
+.zf-note blockquote {
+  font-size: 1.1rem;
+  line-height: 2.05;
+  white-space: pre-line;
+}
+
+/* countdown band */
+.zf-band {
+  padding: 3.75rem 1.5rem 4rem;
+  background:
+    radial-gradient(80% 50% at 50% 0%, rgba(255, 190, 110, 0.18), transparent 70%),
+    linear-gradient(180deg, var(--zf-plum) 0%, var(--zf-plum-deep) 100%);
+  color: var(--zf-cream);
+}
+
+.zf-band .zf-kicker {
+  color: var(--zf-brass-hi);
+}
+
+.zf-count {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+  max-width: 22rem;
+  margin: 1.75rem auto 0;
+}
+
+.zf-count-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.1rem 0.25rem 0.75rem;
+  border: 1px solid rgba(230, 194, 126, 0.35);
+  border-radius: 999px 999px 0.75rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.zf-count-num {
+  font-family: var(--tf-ar-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--zf-brass-hi);
+  font-variant-numeric: tabular-nums;
+}
+
+.zf-count-label {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--zf-cream) 80%, transparent);
+}
+
+.zf-count-placeholder {
+  height: 6rem;
+}
+
+.zf-today {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: var(--tf-ar-script);
+  font-size: 2rem;
+  color: var(--zf-brass-hi);
+}
+
+/* programme with candles */
+.zf-programme {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  max-width: 21rem;
+  margin: 1.9rem auto 0;
+}
+
+.zf-step {
+  display: grid;
+  grid-template-columns: 2.4rem 5.5rem 1fr;
+  align-items: end;
+  padding: 0.65rem 0.25rem 0.75rem;
+  border-bottom: 1px dashed color-mix(in srgb, var(--zf-brass) 35%, transparent);
+}
+
+.zf-step:last-child {
+  border-bottom: 0;
+}
+
+.zf-step-candle {
+  display: flex;
+  justify-content: center;
+}
+
+.zf-step-time {
+  font-family: var(--tf-ar-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--zf-brass-ink);
+}
+
+.zf-step-label {
+  font-size: 1.05rem;
+}
+
+.zf-step-fire,
+.zf-step-halo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.zf-step-fire {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.zf-step.is-in .zf-step-fire {
+  animation: zf-ignite 0.55s cubic-bezier(0.3, 1.4, 0.5, 1) 0.45s forwards;
+}
+
+.zf-step.is-in .zf-step-halo {
+  opacity: 0.35;
+  transition: opacity 0.8s ease 0.55s;
+}
+
+/* venue */
+.zf-venue {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.6rem 2rem;
+  background: var(--zf-card);
+  box-shadow: 0 18px 44px rgba(59, 36, 23, 0.08);
+  text-align: center;
+}
+
+.zf-venue .zf-title {
+  font-family: var(--tf-ar-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.zf-venue-when {
+  margin-top: 1rem;
+  line-height: 1.9;
+}
+
+.zf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.zf-btn {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.35rem;
+  border-radius: 999px;
+  background: var(--zf-ink);
+  color: var(--zf-paper);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.zf-btn:active {
+  transform: scale(0.97);
+}
+
+.zf-btn.is-ghost {
+  border: 1px solid color-mix(in srgb, var(--zf-ink) 35%, transparent);
+  background: transparent;
+  color: var(--zf-ink);
+}
+
+/* divider */
+.zf-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-inline: 3rem;
+  color: var(--zf-brass);
+}
+
+.zf-divider span {
+  height: 1px;
+  flex: 1;
+  max-width: 7rem;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* forms */
+.zf-form {
+  max-width: 24rem;
+  margin: 1.75rem auto 0;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--zf-brass) 28%, transparent);
+  border-radius: 1.2rem;
+  background: color-mix(in srgb, var(--zf-card) 90%, transparent);
+  box-shadow: 0 14px 34px rgba(59, 36, 23, 0.06);
+}
+
+.zf .field,
+.zf input,
+.zf textarea,
+.zf select {
+  border-color: color-mix(in srgb, var(--zf-brass) 35%, #e4d8c8);
+  background: #fff;
+}
+
+.zf .field:focus,
+.zf input:focus,
+.zf textarea:focus {
+  border-color: var(--zf-ink);
+  box-shadow: 0 0 0 3px rgba(192, 138, 62, 0.2);
+}
+
+/* closing */
+.zf-closing {
+  padding: 3.5rem 1.75rem 2rem;
+  text-align: center;
+}
+
+.zf-closing-mark {
+  display: inline-block;
+  color: var(--zf-brass);
+}
+
+.zf-dua {
+  margin-top: 0.75rem;
+  font-family: var(--tf-ar-verse);
+  font-size: 1.45rem;
+  line-height: 2.1;
+}
+
+.zf-closing-names {
+  margin-top: 0.9rem;
+  font-family: var(--tf-ar-script);
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.zf-footer {
+  padding: 1.5rem 1.5rem 7.5rem;
+  text-align: center;
+  color: var(--zf-muted);
+  font-size: 0.85rem;
+}
+
+.zf-footer a {
+  font-family: var(--tf-ar-script);
+  font-size: 1.5rem;
+  color: var(--zf-ink);
+  text-decoration: none;
+}
+
+/* sticky CTA tint (StoryCta renders .wax-business outside the article) */
+.zf-page .wax-business a {
+  background: #3b2417;
+  color: #f8f0e3;
+}
+
+.zf-page .wax-business button {
+  color: #3b2417;
+}
+
+/* ───────── Keyframes ───────── */
+
+@keyframes zf-tap {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 194, 126, 0.35); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(230, 194, 126, 0); }
+}
+
+@keyframes zf-ignite {
+  0% { opacity: 0; transform: scale(0); }
+  55% { opacity: 1; transform: scale(1.15, 1.25); }
+  80% { transform: scale(0.92, 0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes zf-halo {
+  0% { opacity: 0; transform: scale(0.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes zf-flicker {
+  0% { transform: scale(1, 1) skewX(0deg); }
+  50% { transform: scale(0.94, 1.08) skewX(-3deg); }
+  100% { transform: scale(1.04, 0.96) skewX(2deg); }
+}
+
+@keyframes zf-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ───────── Still / reduced motion: final state, no movement ───────── */
+
+.zf.is-still .zf-line,
+.zf.is-still .zf-reveal,
+.zf.is-still .zf-arch-crown,
+.zf.is-still .zf-step-fire {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  animation: none;
+}
+
+.zf.is-still .zf-arch-line path {
+  stroke-dashoffset: 0;
+  transition: none;
+}
+
+.zf.is-still .zf-step-halo {
+  opacity: 0.35;
+}
+
+.zf.is-still .zf-mini-fire,
+.zf.is-still .zf-tap,
+.zf.is-still .zf-scroll {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zf .zf-line,
+  .zf .zf-reveal,
+  .zf .zf-arch-crown,
+  .zf .zf-step-fire {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .zf .zf-arch-line path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .zf .zf-step-halo {
+    opacity: 0.35;
+    transition: none;
+  }
+
+  .zf .zf-mini-fire,
+  .zf .zf-tap,
+  .zf .zf-scroll {
+    animation: none;
+  }
+
+  .zf-cover {
+    transition: opacity 0.2s;
+  }
+}

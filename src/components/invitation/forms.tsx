@@ -8,6 +8,14 @@ import type { InvitationEvent, RsvpStatus } from "@/lib/types";
 
 const PRESETS = [20000, 50000, 100000, 200000];
 
+const MESSAGE_PLACEHOLDER: Record<InvitationEvent["type"], string> = {
+  WEDDING: "كلمتك للعروسين أو لأهل الفرح",
+  ENGAGEMENT: "كلمتك للعروسين أو لأهل الفرح",
+  BIRTHDAY: "كلمتك أو أمنيتك لصاحب العيد",
+  SEBOU: "دعاؤك للمولود ولأهله",
+  AQIQAH: "دعاؤك للمولود ولأهله",
+};
+
 export function RsvpForm({ event, defaultName = "" }: { event: InvitationEvent; defaultName?: string }) {
   const { addRsvp } = useStore();
   const [name, setName] = useState(defaultName);
@@ -112,7 +120,7 @@ export function MessageForm({ event }: { event: InvitationEvent }) {
       )}
       <form onSubmit={submit} className="grid gap-3">
         <input className="field" value={name} onChange={(e) => setName(e.target.value)} placeholder="اسمك" aria-label="اسمك" />
-        <textarea className="field min-h-24" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="كلمتك للعروسين أو لأهل الفرح" aria-label="الرسالة" />
+        <textarea className="field min-h-24" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={MESSAGE_PLACEHOLDER[event.type]} aria-label="الرسالة" />
         {error && <p className="text-sm text-red-700">{error}</p>}
         <button className="submit-btn" type="submit">
           أرسل الرسالة

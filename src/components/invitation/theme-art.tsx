@@ -76,8 +76,18 @@ function draw(kind: OpeningKind, face: Face, names: string, date: string, kicker
   if (kind === "lavender") return face === "a" ? <LavenderWindow /> : <LavenderWreath names={names} />;
   if (kind === "mashrabiya") return face === "a" ? <MashDoor /> : <LanternCard names={names} date={date} />;
   if (kind === "moon") return face === "a" ? <MoonDoor /> : <Terrace names={names} />;
-  if (kind === "ringbox") return face === "a" ? <RingBox /> : <RingsCard names={names} date={date} />;
-  if (kind === "gift") return face === "a" ? <GiftBox /> : <ConfettiCard names={names} />;
+  if (kind === "ringbox") return face === "a" ? <RingBox names={names} date={date} /> : <RingsCard names={names} date={date} />;
+  if (kind === "lanterns") return face === "a" ? <LanternCover names={names} date={date} /> : <LanternHero names={names} date={date} />;
+  if (kind === "olive") return face === "a" ? <OliveCover names={names} date={date} /> : <OliveHero names={names} />;
+  if (kind === "shamadan") return face === "a" ? <ShamadanCover names={names} date={date} /> : <ShamadanArch names={names} date={date} />;
+  if (kind === "balloons") return face === "a" ? <GoldBalloons names={names} date={date} /> : <GoldNight names={names} date={date} />;
+  if (kind === "ribbon") return face === "a" ? <RibbonLetter names={names} date={date} /> : <PromiseRings names={names} date={date} />;
+  if (kind === "envelope") return face === "a" ? <EnvelopeCover names={names} date={date} /> : <EnvelopeHero names={names} date={date} />;
+  if (kind === "rings") return face === "a" ? <PolaroidCover names={names} date={date} /> : <PolaroidHero names={names} date={date} />;
+  if (kind === "candles") return face === "a" ? <CandlesCover names={names} date={date} /> : <CandlesHero names={names} date={date} />;
+  if (kind === "confetti") return face === "a" ? <ConfettiCover names={names} date={date} /> : <ConfettiHero names={names} date={date} />;
+  if (kind === "gift") return face === "a" ? <GiftCover names={names} date={date} /> : <GiftHero names={names} date={date} />;
+  if (kind === "sieve") return face === "a" ? <SieveCover names={names} date={date} /> : <SieveHero names={names} date={date} />;
   if (kind === "rosegate") return face === "a" ? <RoseHeroMini names={names} date={date} /> : <RosePlanMini />;
   if (kind === "classic") return face === "a" ? <ClassicMini names={names} date={date} /> : <ClassicQuoteMini />;
   if (kind === "navy") return face === "a" ? <NavyMini names={names} date={date} /> : <NavyPlanMini names={names} />;
@@ -559,62 +569,747 @@ function Terrace({ names }: { names: string }) {
   );
 }
 
-function RingBox() {
+function RingBox({ names, date }: { names: string; date: string }) {
   return (
     <g>
-      <ellipse cx="80" cy="210" rx="46" ry="10" fill="#eadfd6" />
-      <path d="M40 150 h80 v48 h-80z" fill="#9a5b63" />
-      <path d="M40 150 l40 -28 40 28" fill="#c48b74" />
-      <circle cx="64" cy="168" r="10" fill="none" stroke="#fff9f6" strokeWidth="3" />
-      <circle cx="96" cy="168" r="10" fill="none" stroke="#fff9f6" strokeWidth="3" />
-      <circle cx="64" cy="168" r="3" fill="#e6c27a" />
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#f1ddd3" />
+      <ellipse cx="80" cy="150" rx="58" ry="52" fill="#fff" opacity="0.4" />
+      <text x="80" y="38" textAnchor="middle" fill="#8f5640" fontSize="8" fontFamily={display}>
+        دعوة خطوبة
+      </text>
+      <Name y={68} size={16} fill="#552632">
+        {names}
+      </Name>
+      <ellipse cx="80" cy="214" rx="56" ry="6" fill="#552632" opacity="0.2" />
+      <path d="M32 160 H128 L124 212 Q123 217 118 217 H42 Q37 217 36 212 Z" fill="#6f3342" />
+      <path d="M32 160 H128 L120 128 H40 Z" fill="#9a5566" />
+      <path d="M32 160 H128 L127 180 Q127 183 124 183 H36 Q33 183 33 180 Z" fill="#5b2a36" />
+      <rect x="74" y="164" width="12" height="10" rx="2.5" fill="#c48b74" />
+      <text x="80" y="250" textAnchor="middle" fill="#7a5a60" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+      <circle cx="80" cy="266" r="6" fill="none" stroke="#7d3d4c" strokeWidth="0.8" opacity="0.7" />
     </g>
   );
 }
 
 function RingsCard({ names, date }: { names: string; date: string }) {
+  const parts = names.split(" و ");
+  const first = Array.from(parts[0]?.trim() ?? "")[0] ?? "";
+  const second = Array.from(parts[1]?.trim() ?? parts[0]?.trim() ?? "")[0] ?? "";
   return (
     <g>
-      <Sprig x={18} y={70} color="#8d74a8" />
-      <Sprig x={108} y={78} color="#8d74a8" flip />
-      <circle cx="62" cy="120" r="16" fill="none" stroke="#c48b74" strokeWidth="3" />
-      <circle cx="98" cy="120" r="16" fill="none" stroke="#c48b74" strokeWidth="3" />
-      <Name y={180} size={18} fill="#3a2a2a">
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#f8efe9" />
+      <text x="80" y="42" textAnchor="middle" fill="#8f5640" fontSize="7.5" fontFamily={display}>
+        قالوا نعم… وقلوبنا اتفقت
+      </text>
+      <circle cx="62" cy="104" r="32" fill="none" stroke="#c48b74" strokeWidth="3.5" />
+      <circle cx="98" cy="104" r="32" fill="none" stroke="#c48b74" strokeWidth="3.5" />
+      <path d="M98 66 l6 6 -6 8 -6 -8z" fill="#fff9f2" stroke="#c48b74" strokeWidth="1.4" strokeLinejoin="round" />
+      <text x="46" y="116" textAnchor="middle" fill="#552632" fontSize="26" fontFamily={script} fontWeight="700">
+        {first}
+      </text>
+      <text x="114" y="116" textAnchor="middle" fill="#552632" fontSize="26" fontFamily={script} fontWeight="700">
+        {second}
+      </text>
+      <Name y={176} size={16} fill="#3a2a2a">
         {names}
       </Name>
-      <text x="80" y="214" textAnchor="middle" fill="#8a6d66" fontSize="12" fontFamily={display}>
+      <rect x="34" y="198" width="92" height="20" rx="10" fill="none" stroke="#c48b74" strokeWidth="0.8" />
+      <text x="80" y="211" textAnchor="middle" fill="#3a2a2a" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      {[40, 68, 96, 124].map((x) => (
+        <circle key={x} cx={x} cy="246" r="9" fill="none" stroke="#c48b74" strokeWidth="1.6" />
+      ))}
+    </g>
+  );
+}
+
+function PartyBunting({ y = 22 }: { y?: number }) {
+  const colors = ["#7b3ff2", "#ff4f8b", "#3ec6ff", "#ffd21f", "#7b3ff2", "#ff4f8b"];
+  return (
+    <g>
+      <path d={`M8 ${y - 8} C50 ${y + 6} 110 ${y + 6} 152 ${y - 8}`} fill="none" stroke="#351848" strokeWidth="1.2" />
+      {colors.map((color, i) => (
+        <path key={i} d={`M${14 + i * 24} ${y - 4 + (i === 2 || i === 3 ? 4 : 0)} h18 l-9 16z`} fill={color} stroke="#351848" strokeWidth="1" strokeLinejoin="round" />
+      ))}
+    </g>
+  );
+}
+
+function CandlesCover({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#ffe0ee" />
+      <rect x="32" y="34" width="96" height="17" rx="8.5" fill="#7b3ff2" stroke="#351848" strokeWidth="1.4" />
+      <text x="80" y="46" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="700" fontFamily={display}>
+        دعوة عيد ميلاد
+      </text>
+      <Name y={92} size={26} fill="#351848">
+        {names}
+      </Name>
+      <ellipse cx="80" cy="226" rx="58" ry="8" fill="#fff" stroke="#e5d4f2" />
+      <rect x="34" y="172" width="92" height="52" rx="9" fill="#ff8fb5" />
+      <path d="M34 172 V180 q6 10 12 0 q6 10 12 0 q6 10 12 0 q6 10 12 0 q6 10 12 0 q6 10 12 0 q6 10 10 0 V172Z" fill="#ffe0ec" />
+      <rect x="50" y="140" width="60" height="36" rx="8" fill="#a371ff" />
+      {[66, 80, 94].map((x, i) => (
+        <g key={x}>
+          <rect x={x - 2.5} y="112" width="5" height="30" rx="1.5" fill={["#ff4f8b", "#3ec6ff", "#ffd21f"][i]} />
+          <path d={`M${x} 110 c-4 -5 -3 -10 0 -16 c3 6 4 11 0 16z`} fill="#ffa43a" />
+        </g>
+      ))}
+      <text x="80" y="256" textAnchor="middle" fill="#6b3f7c" fontSize="7" fontFamily={display}>
         {date}
       </text>
     </g>
   );
 }
 
-function GiftBox() {
+function CandlesHero({ names, date }: { names: string; date: string }) {
   return (
     <g>
-      <circle cx="36" cy="40" r="4" fill="#ff5a8a" />
-      <circle cx="120" cy="36" r="5" fill="#7c5cff" />
-      <circle cx="100" cy="70" r="3" fill="#ffe14a" />
-      <rect x="36" y="120" width="88" height="72" rx="6" fill="#ff5a8a" />
-      <rect x="74" y="120" width="12" height="72" fill="#ffe14a" />
-      <path d="M80 120 c-18 -26 -40 -8 -22 8 h22 M80 120 c18 -26 40 -8 22 8 h-22" fill="#ffe14a" />
-      <rect x="36" y="112" width="88" height="16" rx="3" fill="#7c5cff" />
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#fff1f7" />
+      <PartyBunting />
+      <rect x="40" y="82" width="80" height="18" rx="9" fill="#7b3ff2" stroke="#351848" strokeWidth="1.4" />
+      <text x="80" y="95" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="700" fontFamily={display}>
+        كل سنة وانت طيب
+      </text>
+      <text x="83" y="140" textAnchor="middle" fill="#ff4f8b" fontSize="30" fontFamily={script}>
+        {names}
+      </text>
+      <Name y={137} size={30} fill="#351848">
+        {names}
+      </Name>
+      <rect x="32" y="162" width="96" height="20" rx="10" fill="#fff" stroke="#351848" strokeWidth="1.4" />
+      <text x="80" y="175" textAnchor="middle" fill="#351848" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x="22" y={196 + i * 26} width="116" height="20" rx="8" fill="#fff" stroke="#351848" strokeWidth="1.2" />
+          <circle cx="126" cy={206 + i * 26} r="6" fill={["#7b3ff2", "#ff4f8b", "#3ec6ff"][i]} stroke="#351848" strokeWidth="1" />
+        </g>
+      ))}
     </g>
   );
 }
 
-function ConfettiCard({ names }: { names: string }) {
+function ConfettiCover({ names, date }: { names: string; date: string }) {
+  const balloons = [
+    [46, 120, 22, 27, "#ff5a1f"],
+    [114, 120, 22, 27, "#22d3c5"],
+    [80, 100, 25, 30, "#ff3d7f"],
+    [62, 150, 21, 26, "#7c5cff"],
+    [98, 150, 21, 26, "#ffb703"],
+  ] as const;
   return (
     <g>
-      <rect x="20" y="40" width="10" height="4" fill="#ff5a8a" transform="rotate(20 25 42)" />
-      <rect x="120" y="60" width="12" height="4" fill="#7c5cff" transform="rotate(-16 126 62)" />
-      <rect x="40" y="90" width="8" height="4" fill="#ffe14a" />
-      <circle cx="110" cy="100" r="4" fill="#ff5a8a" />
-      <Name y={150} size={22} fill="#3a2148">
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#fff3a8" />
+      <rect x="40" y="34" width="80" height="17" rx="8.5" fill="#ffe14a" stroke="#1d1a4a" strokeWidth="1.4" />
+      <text x="80" y="46" textAnchor="middle" fill="#1d1a4a" fontSize="8" fontWeight="700" fontFamily={display}>
+        دعوة حفلة
+      </text>
+      <Name y={86} size={24} fill="#1d1a4a">
         {names}
       </Name>
-      <text x="80" y="190" textAnchor="middle" fill="#8a4d78" fontSize="13" fontFamily={display}>
-        يوم سعيد
+      <g transform="translate(0 16)"><path d="M46 146 C60 190 78 204 80 214 M114 146 C100 190 82 204 80 214 M80 126 C78 170 82 200 80 214" fill="none" stroke="#1d1a4a" strokeOpacity="0.5" strokeWidth="1" />
+      {balloons.map(([cx, cy, rx, ry, fill]) => (
+        <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke="#1d1a4a" strokeWidth="1.6" />
+      ))}
+      <rect x="73" y="212" width="14" height="10" rx="3" fill="#1d1a4a" /></g>
+      <text x="80" y="256" textAnchor="middle" fill="#54497a" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function ConfettiHero({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#fff8d4" />
+      <path d="M2 4 C30 20 60 12 90 34" fill="none" stroke="#ff5a1f" strokeWidth="5" strokeLinecap="round" />
+      <path d="M158 4 C130 20 100 12 70 34" fill="none" stroke="#22d3c5" strokeWidth="5" strokeLinecap="round" />
+      <path d="M2 14 C28 32 56 24 82 44" fill="none" stroke="#ff3d7f" strokeWidth="5" strokeLinecap="round" />
+      <path d="M158 14 C132 32 104 24 78 44" fill="none" stroke="#7c5cff" strokeWidth="5" strokeLinecap="round" />
+      <rect x="36" y="86" width="88" height="18" rx="9" fill="#ffe14a" stroke="#1d1a4a" strokeWidth="1.4" />
+      <text x="80" y="99" textAnchor="middle" fill="#1d1a4a" fontSize="8" fontWeight="700" fontFamily={display}>
+        حفلة ألوان
+      </text>
+      <text x="83" y="144" textAnchor="middle" fill="#ff3d7f" fontSize="30" fontFamily={script}>
+        {names}
+      </text>
+      <Name y={141} size={30} fill="#1d1a4a">
+        {names}
+      </Name>
+      <rect x="32" y="166" width="96" height="20" rx="10" fill="#fff" stroke="#1d1a4a" strokeWidth="1.4" />
+      <text x="80" y="179" textAnchor="middle" fill="#1d1a4a" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x="22" y={202 + i * 24} width="116" height="18" rx="8" fill="#fff" stroke="#1d1a4a" strokeWidth="1.2" />
+      ))}
+    </g>
+  );
+}
+
+function GiftCover({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#ffe6d2" />
+      <rect x="34" y="34" width="92" height="17" rx="8.5" fill="#ffe14a" stroke="#3a2148" strokeWidth="1.4" />
+      <text x="80" y="46" textAnchor="middle" fill="#3a2148" fontSize="8" fontWeight="700" fontFamily={display}>
+        مفاجأة عيد ميلاد
+      </text>
+      <Name y={88} size={24} fill="#3a2148">
+        {names}
+      </Name>
+      <rect x="54" y="132" width="52" height="40" rx="4" fill="#fff" stroke="#3a2148" strokeWidth="1.4" transform="rotate(-5 80 152)" />
+      <rect x="36" y="170" width="88" height="62" rx="6" fill="#ff5a8a" stroke="#3a2148" strokeWidth="1.8" />
+      <rect x="68" y="170" width="24" height="62" fill="#7b3ff2" stroke="#3a2148" strokeWidth="1.4" />
+      <rect x="28" y="150" width="104" height="24" rx="6" fill="#ff7aa3" stroke="#3a2148" strokeWidth="1.8" transform="rotate(-8 80 162)" />
+      <path d="M80 148 C60 124 40 140 70 150 Z M80 148 C100 124 120 140 90 150 Z" fill="#ffe14a" stroke="#3a2148" strokeWidth="1.6" strokeLinejoin="round" />
+      <text x="80" y="256" textAnchor="middle" fill="#6f4b7e" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function GiftHero({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#fff4ea" />
+      <path d="M2 24 L60 4" stroke="#7b3ff2" strokeWidth="14" />
+      <path d="M158 24 L100 4" stroke="#ff5a8a" strokeWidth="14" />
+      <rect x="36" y="86" width="88" height="18" rx="9" fill="#ffe14a" stroke="#3a2148" strokeWidth="1.4" />
+      <text x="80" y="99" textAnchor="middle" fill="#3a2148" fontSize="8" fontWeight="700" fontFamily={display}>
+        ده كارت دعوتك
+      </text>
+      <text x="83" y="144" textAnchor="middle" fill="#ff5a8a" fontSize="30" fontFamily={script}>
+        {names}
+      </text>
+      <Name y={141} size={30} fill="#3a2148">
+        {names}
+      </Name>
+      <rect x="32" y="166" width="96" height="20" rx="10" fill="#fff" stroke="#3a2148" strokeWidth="1.4" />
+      <text x="80" y="179" textAnchor="middle" fill="#3a2148" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x="22" y={202 + i * 24} width="116" height="18" rx="8" fill="#fff" stroke="#3a2148" strokeWidth="1.2" />
+      ))}
+    </g>
+  );
+}
+
+function SieveCover({ names, date }: { names: string; date: string }) {
+  const candies = [
+    [62, 112, "#ff4d6d"],
+    [82, 104, "#ffb703"],
+    [102, 112, "#7c5cff"],
+    [72, 134, "#22b8cf"],
+    [94, 132, "#ffffff"],
+    [58, 140, "#ffb703"],
+    [106, 140, "#ff4d6d"],
+  ] as const;
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#c8fbee" />
+      <rect x="40" y="34" width="80" height="17" rx="8.5" fill="#ffb703" stroke="#1c2a4a" strokeWidth="1.4" />
+      <text x="80" y="46" textAnchor="middle" fill="#1c2a4a" fontSize="8" fontWeight="700" fontFamily={display}>
+        دعوة سبوع
+      </text>
+      <Name y={90} size={26} fill="#1c2a4a">
+        {names}
+      </Name>
+      <circle cx="80" cy="170" r="58" fill="#fff6dd" fillOpacity="0.6" />
+      <circle cx="80" cy="170" r="58" fill="none" stroke="#a9702f" strokeWidth="9" />
+      {[-30, -15, 0, 15, 30].map((o) => (
+        <path key={`v${o}`} d={`M${80 + o} 118 V222`} stroke="#b9803f" strokeWidth="0.6" opacity="0.6" />
+      ))}
+      {[-30, -15, 0, 15, 30].map((o) => (
+        <path key={`h${o}`} d={`M28 ${170 + o} H132`} stroke="#b9803f" strokeWidth="0.6" opacity="0.6" />
+      ))}
+      {candies.map(([x, y, fill]) => (
+        <circle key={`${x}-${y}`} cx={x} cy={y + 30} r="6.5" fill={fill} stroke="#1c2a4a" strokeWidth="1.4" />
+      ))}
+      <text x="80" y="256" textAnchor="middle" fill="#3d6b78" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function SieveHero({ names, date }: { names: string; date: string }) {
+  const colors = ["#ff4d6d", "#ffb703", "#7c5cff", "#22b8cf", "#ff4d6d", "#ffb703"];
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#eafff8" />
+      <path d="M8 14 C50 28 110 28 152 14" fill="none" stroke="#1c2a4a" strokeWidth="1.2" />
+      {colors.map((color, i) => (
+        <path key={i} d={`M${14 + i * 24} ${18 + (i === 2 || i === 3 ? 4 : 0)} h18 l-9 16z`} fill={color} stroke="#1c2a4a" strokeWidth="1" strokeLinejoin="round" />
+      ))}
+      <rect x="44" y="82" width="72" height="18" rx="9" fill="#ffb703" stroke="#1c2a4a" strokeWidth="1.4" />
+      <text x="80" y="95" textAnchor="middle" fill="#1c2a4a" fontSize="8.5" fontWeight="700" fontFamily={display}>
+        ألف مبروك
+      </text>
+      <Name y={140} size={32} fill="#1c2a4a">
+        {names}
+      </Name>
+      <rect x="32" y="164" width="96" height="20" rx="10" fill="#fff" stroke="#1c2a4a" strokeWidth="1.4" />
+      <text x="80" y="177" textAnchor="middle" fill="#1c2a4a" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x="22" y={202 + i * 24} width="116" height="18" rx="8" fill="#fff" stroke="#1c2a4a" strokeWidth="1.2" />
+      ))}
+    </g>
+  );
+}
+
+function PolaroidCover({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#efdcc9" />
+      <ellipse cx="80" cy="140" rx="60" ry="70" fill="#fff" opacity="0.4" />
+      <text x="80" y="40" textAnchor="middle" fill="#9a4a36" fontSize="8" fontFamily={display}>
+        دعوة خطوبة
+      </text>
+      <g transform="rotate(-4 80 138)">
+        <rect x="34" y="62" width="92" height="124" fill="#fffdf9" />
+        <rect x="42" y="70" width="76" height="76" fill="#dcd0be" />
+        <ellipse cx="80" cy="108" rx="26" ry="22" fill="#fff" opacity="0.35" />
+        <Name y={170} size={13} fill="#3b2a28">
+          {names}
+        </Name>
+        <rect x="38" y="56" width="26" height="9" fill="#f2c6b0" opacity="0.9" transform="rotate(-28 51 60)" />
+        <rect x="96" y="56" width="26" height="9" fill="#f2c6b0" opacity="0.9" transform="rotate(26 109 60)" />
+      </g>
+      <text x="80" y="224" textAnchor="middle" fill="#7a5a52" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+      <circle cx="80" cy="248" r="9" fill="none" stroke="#6e382c" strokeWidth="0.8" opacity="0.7" />
+    </g>
+  );
+}
+
+function PolaroidHero({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#f6ede2" />
+      <text x="80" y="40" textAnchor="middle" fill="#9a4a36" fontSize="10" fontFamily={script}>
+        لقطة من حكايتنا
+      </text>
+      <g transform="rotate(-3 80 112)">
+        <rect x="30" y="54" width="100" height="132" fill="#fffdf9" />
+        <rect x="38" y="62" width="84" height="84" fill="#f2c6b0" />
+        <circle cx="68" cy="108" r="20" fill="none" stroke="#b8604a" strokeWidth="3.5" />
+        <circle cx="92" cy="108" r="20" fill="none" stroke="#b8604a" strokeWidth="3.5" />
+        <path d="M92 84 l5 5 -5 6 -5 -6z" fill="#fffdf9" stroke="#b8604a" strokeWidth="1.2" strokeLinejoin="round" />
+        <Name y={172} size={14} fill="#3b2a28">
+          {names}
+        </Name>
+        <rect x="34" y="48" width="28" height="9" fill="#f2c6b0" opacity="0.9" transform="rotate(-28 48 52)" />
+        <rect x="98" y="48" width="28" height="9" fill="#f2c6b0" opacity="0.9" transform="rotate(26 112 52)" />
+      </g>
+      <text x="80" y="214" textAnchor="middle" fill="#3b2a28" fontSize="8.5" fontFamily={display}>
+        لقطة واحدة… وحكاية كاملة
+      </text>
+      <rect x="34" y="226" width="92" height="20" rx="4" fill="none" stroke="#b8604a" strokeWidth="0.8" strokeDasharray="3 2" />
+      <text x="80" y="239" textAnchor="middle" fill="#3b2a28" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function EnvelopeCover({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#efe2cf" />
+      <text x="80" y="44" textAnchor="middle" fill="#84642f" fontSize="8" fontFamily={display}>
+        دعوة زفاف
+      </text>
+      <Name y={80} size={17} fill="#2a2118">
+        {names}
+      </Name>
+      <rect x="22" y="118" width="116" height="80" rx="3" fill="#e3d2b8" />
+      <path d="M22 118 L80 166 L138 118 V198 H22 Z" fill="#f2e6d4" />
+      <path d="M22 118 H138 L80 166 Z" fill="#ecdcc4" stroke="#d8c4a6" strokeWidth="0.6" />
+      <circle cx="80" cy="162" r="11" fill="#b08a52" />
+      <circle cx="80" cy="162" r="6" fill="none" stroke="#fff4dc" strokeWidth="1" />
+      {[[34, 100], [118, 96], [52, 224], [112, 230], [26, 210]].map(([x, y]) => (
+        <ellipse key={`${x}-${y}`} cx={x} cy={y} rx="3" ry="4.5" fill="#efc3cb" transform={`rotate(30 ${x} ${y})`} />
+      ))}
+      <text x="80" y="250" textAnchor="middle" fill="#6b594a" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function EnvelopeHero({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#f7f1e7" />
+      <path d="M40 46 C54 38 66 38 80 46 C94 38 106 38 120 46" fill="none" stroke="#b08a52" strokeWidth="1" />
+      <circle cx="80" cy="42" r="4" fill="#b08a52" opacity="0.4" />
+      <text x="80" y="72" textAnchor="middle" fill="#84642f" fontSize="7" fontFamily="var(--font-amiri), serif">
+        ﴿ وجعل بينكم مودة ورحمة ﴾
+      </text>
+      <Name y={126} size={20} fill="#2a2118">
+        {names}
+      </Name>
+      <path d="M34 156 H62 M98 156 H126 M34 172 H62 M98 172 H126" stroke="#b08a52" strokeWidth="0.6" />
+      <text x="80" y="170" textAnchor="middle" fill="#84642f" fontSize="18" fontWeight="700" fontFamily={display}>
+        ٢١
+      </text>
+      <text x="80" y="196" textAnchor="middle" fill="#6b594a" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+      <rect x="40" y="218" width="80" height="44" rx="3" fill="none" stroke="#b08a52" strokeWidth="0.8" />
+    </g>
+  );
+}
+
+function RibbonLetter({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#3d1019" />
+      <ellipse cx="80" cy="122" rx="58" ry="74" fill="#e8b4bc" opacity="0.07" />
+      <text x="80" y="40" textAnchor="middle" fill="#e2c597" fontSize="9" fontFamily={display}>
+        دعوة خطوبة
+      </text>
+      <rect x="30" y="56" width="100" height="134" rx="3" fill="#fffaf6" />
+      <rect x="36" y="62" width="88" height="122" rx="2" fill="none" stroke="#b98a56" strokeWidth="0.8" opacity="0.7" />
+      <circle cx="75" cy="84" r="5" fill="none" stroke="#b98a56" strokeWidth="1.2" />
+      <circle cx="85" cy="84" r="5" fill="none" stroke="#b98a56" strokeWidth="1.2" />
+      <Name y={114} size={13} fill="#4a1a26">
+        {names}
+      </Name>
+      <rect x="30" y="140" width="100" height="10" fill="#d993a0" />
+      <path d="M80 145 C70 132 54 134 56 144 C58 152 72 150 80 146z" fill="#e3a5af" />
+      <path d="M80 145 C90 132 106 134 104 144 C102 152 88 150 80 146z" fill="#e3a5af" />
+      <path d="M78 147 L70 166 L76 163 L78 168 L82 149z M82 147 L90 166 L84 163 L82 168 L78 149z" fill="#c97f8c" />
+      <rect x="76" y="141" width="8" height="8" rx="2.5" fill="#c97f8c" />
+      <text x="80" y="178" textAnchor="middle" fill="#7d5560" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+      <circle cx="80" cy="228" r="11" fill="none" stroke="#e2c597" strokeWidth="0.8" opacity="0.7" />
+      <text x="80" y="256" textAnchor="middle" fill="#fbf4ee" fontSize="7.5" fontFamily={display} opacity="0.85">
+        المس الفيونكة
+      </text>
+    </g>
+  );
+}
+
+function PromiseRings({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <circle cx="68" cy="96" r="20" fill="none" stroke="#b98a56" strokeWidth="3" />
+      <circle cx="92" cy="96" r="20" fill="none" stroke="#b98a56" strokeWidth="3" />
+      <path d="M92 70 l5 5 -5 6 -5 -6z" fill="#fbf4ee" stroke="#b98a56" strokeWidth="1.2" strokeLinejoin="round" />
+      <text x="80" y="140" textAnchor="middle" fill="#b98a56" fontSize="8" fontFamily={display}>
+        من نظرة… لكلمة… لوعد
+      </text>
+      <Name y={172} size={16} fill="#4a1a26">
+        {names}
+      </Name>
+      <rect x="34" y="196" width="92" height="20" rx="10" fill="none" stroke="#b98a56" strokeWidth="0.8" />
+      <text x="80" y="209" textAnchor="middle" fill="#4a1a26" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      <path d="M30 240 C50 230 62 250 80 240 S110 230 130 240" fill="none" stroke="#e8b4bc" strokeWidth="1.4" />
+    </g>
+  );
+}
+
+function MiniCandelabra({ x, y, s = 1, lit = true }: { x: number; y: number; s?: number; lit?: boolean }) {
+  const cups = [
+    [-30, 0],
+    [-15, 0],
+    [15, 0],
+    [30, 0],
+    [-18, -22],
+    [18, -22],
+    [0, -40],
+  ] as const;
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <path d="M0 10 C-14 10 -28 8 -30 2 M0 10 C14 10 28 8 30 2 M0 6 C-8 6 -14 4 -15 2 M0 6 C8 6 14 4 15 2 M0 -14 C-10 -14 -17 -17 -18 -20 M0 -14 C10 -14 17 -17 18 -20" fill="none" stroke="#c08a3e" strokeWidth="2" strokeLinecap="round" />
+      <rect x="-2" y="-40" width="4" height="86" fill="#c08a3e" />
+      <path d="M-16 50 C-10 42 -4 40 0 40 C4 40 10 42 16 50z" fill="#c08a3e" />
+      {cups.map(([cx, cy]) => (
+        <g key={`${cx}-${cy}`}>
+          {lit && <circle cx={cx} cy={cy - 14} r="7" fill="#ffc35a" opacity="0.28" />}
+          <rect x={cx - 2} y={cy - 10} width="4" height="10" fill="#fffaf0" />
+          {lit && <path d={`M${cx} ${cy - 11} c-2.4 -2.4 -2 -6 0 -9 c2 3 2.4 6.6 0 9z`} fill="#ffb347" />}
+          <path d={`M${cx - 4} ${cy} h8 l-2 3 h-4z`} fill="#c08a3e" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function ShamadanCover({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#21121a" />
+      <ellipse cx="80" cy="150" rx="60" ry="56" fill="#ffc46e" opacity="0.07" />
+      <text x="80" y="38" textAnchor="middle" fill="#e6c27e" fontSize="8" fontFamily={display}>
+        دعوة زفاف
+      </text>
+      <Name y={66} size={15} fill="#f6e9d2">
+        {names}
+      </Name>
+      <MiniCandelabra x={80} y={150} s={1.25} />
+      <text x="80" y="234" textAnchor="middle" fill="#f6e9d2" fontSize="7" fontFamily={display} opacity="0.75">
+        {date}
+      </text>
+      <circle cx="80" cy="252" r="8" fill="none" stroke="#e6c27e" strokeWidth="0.8" opacity="0.7" />
+    </g>
+  );
+}
+
+function ShamadanArch({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <ellipse cx="80" cy="64" rx="66" ry="44" fill="#ffc46e" opacity="0.16" />
+      <path d="M20 262 V98 C20 60 48 34 80 34 C112 34 140 60 140 98 V262" fill="none" stroke="#c08a3e" strokeWidth="1.2" />
+      <path d="M26 262 V100 C26 66 50 40 80 40 C110 40 134 66 134 100 V262" fill="none" stroke="#c08a3e" strokeWidth="0.6" opacity="0.7" />
+      <circle cx="80" cy="34" r="13" fill="#f8f0e3" />
+      <MiniCandelabra x={80} y={34} s={0.32} />
+      <text x="80" y="86" textAnchor="middle" fill="#7a5d48" fontSize="7" fontFamily="var(--font-amiri), serif">
+        بسم الله الرحمن الرحيم
+      </text>
+      <text x="80" y="104" textAnchor="middle" fill="#8a5f26" fontSize="8" fontFamily="var(--font-amiri), serif">
+        ﴿ مودةً ورحمة ﴾
+      </text>
+      <Name y={150} size={17} fill="#3b2417">
+        {names}
+      </Name>
+      <line x1="48" y1="180" x2="112" y2="180" stroke="#c08a3e" strokeWidth="0.6" />
+      <text x="80" y="196" textAnchor="middle" fill="#3b2417" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function GoldBalloons({ names, date }: { names: string; date: string }) {
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#0f0d0b" />
+      <ellipse cx="80" cy="96" rx="62" ry="54" fill="#f3e3bf" opacity="0.06" />
+      <text x="80" y="34" textAnchor="middle" fill="#d9b46a" fontSize="8" fontFamily={display}>
+        دعوة عيد ميلاد
+      </text>
+      <text x="80" y="54" textAnchor="middle" fill="#f3e3bf" fontSize="15" fontFamily="var(--font-pinyon), cursive">
+        Happy Birthday
+      </text>
+      <path d="M52 112 C56 136 72 150 80 166 M80 106 C78 130 82 150 80 166 M110 116 C104 138 88 152 80 166" fill="none" stroke="#d9b46a" strokeWidth="0.6" opacity="0.6" />
+      <ellipse cx="52" cy="92" rx="18" ry="21" fill="#d8a08f" />
+      <ellipse cx="110" cy="96" rx="17" ry="20" fill="#efe6d6" />
+      <ellipse cx="80" cy="82" rx="22" ry="26" fill="#d9b46a" />
+      <ellipse cx="73" cy="72" rx="5" ry="8" fill="#fff" opacity="0.4" />
+      <path d="M80 164 c-5 -4 -10 -1 -6 3 c2 2 6 0 6 -3 c0 3 4 5 6 3 c4 -4 -1 -7 -6 -3z" fill="#d9b46a" />
+      <text x="80" y="198" textAnchor="middle" fill="#f5ead6" fontSize="17" fontWeight="700" fontFamily={display}>
+        {names}
+      </text>
+      <text x="80" y="216" textAnchor="middle" fill="#c8b89a" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+      <circle cx="80" cy="240" r="10" fill="none" stroke="#d9b46a" strokeWidth="0.8" opacity="0.7" />
+      <text x="80" y="264" textAnchor="middle" fill="#f5ead6" fontSize="7" fontFamily={display} opacity="0.8">
+        المس البالونة الدهبي
+      </text>
+    </g>
+  );
+}
+
+function GoldNight({ names, date }: { names: string; date: string }) {
+  const bits = [
+    [30, 40, "#d9b46a"], [128, 34, "#d8a08f"], [50, 70, "#f3e3bf"], [116, 64, "#d9b46a"],
+    [24, 110, "#d8a08f"], [138, 104, "#f3e3bf"], [40, 150, "#d9b46a"], [124, 140, "#efe6d6"],
+  ] as const;
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#0f0d0b" />
+      {bits.map(([x, y, fill], index) => (
+        <rect key={index} x={x} y={y} width="4" height={index % 2 ? 4 : 8} rx="1" fill={fill} transform={`rotate(${index * 37} ${x} ${y})`} />
+      ))}
+      <g stroke="#d9b46a" strokeWidth="1.4" strokeLinecap="round">
+        {Array.from({ length: 12 }, (_, index) => {
+          const a = (index / 12) * Math.PI * 2;
+          return <line key={index} x1={Math.round(80 + Math.cos(a) * 18)} y1={Math.round(70 + Math.sin(a) * 18)} x2={Math.round(80 + Math.cos(a) * 28)} y2={Math.round(70 + Math.sin(a) * 28)} />;
+        })}
+      </g>
+      <ellipse cx="80" cy="68" rx="8" ry="9" fill="#d9b46a" />
+      <text x="80" y="124" textAnchor="middle" fill="#f3e3bf" fontSize="16" fontFamily="var(--font-pinyon), cursive">
+        Happy Birthday
+      </text>
+      <text x="80" y="158" textAnchor="middle" fill="#d9b46a" fontSize="22" fontWeight="700" fontFamily={display}>
+        {names}
+      </text>
+      <rect x="34" y="176" width="92" height="20" rx="10" fill="none" stroke="#d9b46a" strokeWidth="0.8" />
+      <text x="80" y="189" textAnchor="middle" fill="#f5ead6" fontSize="7.5" fontFamily={display}>
+        {date}
+      </text>
+      <rect x="0" y="214" width="160" height="66" fill="#d9b46a" />
+      <rect x="20" y="228" width="26" height="26" rx="5" fill="#15110c" />
+      <rect x="52" y="228" width="26" height="26" rx="5" fill="#15110c" />
+      <rect x="84" y="228" width="26" height="26" rx="5" fill="#15110c" />
+      <rect x="116" y="228" width="26" height="26" rx="5" fill="#15110c" />
+    </g>
+  );
+}
+
+const r1 = (value: number) => Math.round(value * 10) / 10;
+
+function MiniLeaf({ x, y, angle, scale = 0.5 }: { x: number; y: number; angle: number; scale?: number }) {
+  return (
+    <g transform={`translate(${r1(x)} ${r1(y)}) rotate(${r1(angle)}) scale(${scale})`}>
+      <path d="M0 0 C6 -7 22 -8 34 0 C22 8 6 7 0 0Z" fill="#6e8b6a" />
+    </g>
+  );
+}
+
+function OliveCover({ names, date }: { names: string; date: string }) {
+  const leaves = Array.from({ length: 8 }, (_, i) => {
+    const t = 0.15 + (i / 7) * 0.8;
+    const x = 48 + t * 64 + Math.sin(t * 5) * 8;
+    const y = 214 - t * 130;
+    return { x, y, angle: (i % 2 ? 1 : -1) * 52 - 70 };
+  });
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#dbe5d0" />
+      <ellipse cx="80" cy="112" rx="52" ry="70" fill="#fff" opacity="0.28" />
+      <text x="80" y="36" textAnchor="middle" fill="#7a6637" fontSize="8" fontFamily={display}>
+        دعوة عقيقة
+      </text>
+      <text x="80" y="52" textAnchor="middle" fill="#5b6b5d" fontSize="8" fontFamily="var(--font-amiri), serif">
+        بسم الله ما شاء الله
+      </text>
+      <path d="M52 214 C44 170 112 150 102 82" fill="none" stroke="#6b5b3e" strokeWidth="2" strokeLinecap="round" />
+      {leaves.map((leaf, i) => (
+        <MiniLeaf key={i} x={leaf.x} y={leaf.y} angle={leaf.angle} />
+      ))}
+      <Name y={244} size={18} fill="#243028">
+        {names}
+      </Name>
+      <text x="80" y="262" textAnchor="middle" fill="#5b6b5d" fontSize="7" fontFamily={display}>
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function OliveHero({ names }: { names: string }) {
+  const leaves = (["l", "r"] as const).flatMap((side) =>
+    Array.from({ length: 7 }, (_, k) => {
+      const phi = ((k + 1) / 8) * Math.PI;
+      const sign = side === "l" ? -1 : 1;
+      const tangent = (Math.atan2(-Math.sin(phi), side === "l" ? -Math.cos(phi) : Math.cos(phi)) * 180) / Math.PI;
+      return {
+        key: `${side}${k}`,
+        x: 80 + sign * 44 * Math.sin(phi),
+        y: 118 + 44 * Math.cos(phi),
+        angle: tangent + (k % 2 ? -40 : 40),
+      };
+    }),
+  );
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#f3f5ef" />
+      <text x="80" y="40" textAnchor="middle" fill="#7a6637" fontSize="7.5" fontFamily="var(--font-amiri), serif">
+        ﴿ المال والبنون زينة الحياة الدنيا ﴾
+      </text>
+      <path d="M80 162 A44 44 0 0 1 80 74 M80 162 A44 44 0 0 0 80 74" fill="none" stroke="#6b5b3e" strokeWidth="1.6" strokeLinecap="round" />
+      {leaves.map((leaf) => (
+        <MiniLeaf key={leaf.key} x={leaf.x} y={leaf.y} angle={leaf.angle} scale={0.42} />
+      ))}
+      <text x="80" y="108" textAnchor="middle" fill="#5b6b5d" fontSize="6.5" fontFamily={display}>
+        رزقنا الله بـ
+      </text>
+      <Name y={130} size={19} fill="#2f4237">
+        {names}
+      </Name>
+      <rect x="34" y="190" width="92" height="20" rx="10" fill="none" stroke="#6e8b6a" strokeWidth="0.8" />
+      <path d="M44 232 H116" stroke="#6e8b6a" strokeWidth="0.8" opacity="0.5" />
+      <rect x="40" y="244" width="22" height="14" rx="6" fill="#2f4237" opacity="0.85" />
+      <rect x="68" y="244" width="22" height="14" rx="6" fill="#2f4237" opacity="0.85" />
+      <rect x="96" y="244" width="22" height="14" rx="6" fill="#2f4237" opacity="0.85" />
+    </g>
+  );
+}
+
+function MiniLantern({ x, y, scale, color, lit = true }: { x: number; y: number; scale: number; color: string; lit?: boolean }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${scale})`}>
+      {lit ? <circle cx="0" cy="34" r="26" fill="#ffc46e" opacity="0.28" /> : null}
+      <path d="M0 0 V10" stroke="#7a6a58" strokeWidth="1.4" />
+      <path d="M-8 14 H8 L11 20 H-11 Z" fill="#c9a24a" />
+      <path d="M-11 20 H11 L14 58 H-14 Z" fill={color} />
+      <rect x="-6" y="26" width="12" height="22" rx="6" fill={lit ? "#fff0c4" : "#d8ccb2"} />
+      {lit ? <path d="M0 30 C-3 36 -3 40 0 45 C3 40 3 36 0 30 Z" fill="#ffa43a" /> : null}
+      <path d="M-14 58 H14 L11 64 H-11 Z" fill="#c9a24a" />
+    </g>
+  );
+}
+
+function LanternCover({ names, date }: { names: string; date: string }) {
+  const colors = ["#2bb8b0", "#f08a24", "#e8648c", "#3b4a74", "#2bb8b0"];
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#1d2640" />
+      <path d="M12 26 C50 40 110 40 148 26" fill="none" stroke="#7a6a58" strokeWidth="1" />
+      {colors.map((color, i) => (
+        <MiniLantern key={i} x={20 + i * 30} y={i % 2 ? 36 : 28} scale={0.5 + (i === 1 || i === 3 ? 0.08 : 0)} color={color} lit={false} />
+      ))}
+      <text x="80" y="104" textAnchor="middle" fill="#ffd36a" fontSize="8" fontFamily={display}>
+        دعوة سبوع
+      </text>
+      <Name y={136} size={24} fill="#fff6ea">
+        {names}
+      </Name>
+      <path d="M52 192 H108 L103 232 C102 236 99 238 96 238 H64 C61 238 58 236 57 232 Z" fill="#c47a42" />
+      <ellipse cx="80" cy="192" rx="28" ry="5" fill="#2a1408" />
+      <rect x="77" y="150" width="6" height="46" rx="3" fill="#e9a46a" transform="rotate(-12 80 196)" />
+      <text x="80" y="262" textAnchor="middle" fill="#f6e9d2" fontSize="7" fontFamily={display} opacity="0.75">
+        {date}
+      </text>
+    </g>
+  );
+}
+
+function LanternHero({ names, date }: { names: string; date: string }) {
+  const colors = ["#2bb8b0", "#f08a24", "#e8648c", "#3b4a74", "#2bb8b0"];
+  return (
+    <g>
+      <rect x="1" y="1" width="158" height="278" rx="22" fill="#fff6ea" />
+      <path d="M12 26 C50 40 110 40 148 26" fill="none" stroke="#7a6a58" strokeWidth="1" />
+      {colors.map((color, i) => (
+        <MiniLantern key={i} x={20 + i * 30} y={i % 2 ? 36 : 28} scale={0.5 + (i === 1 || i === 3 ? 0.08 : 0)} color={color} />
+      ))}
+      <text x="80" y="126" textAnchor="middle" fill="#a85a0c" fontSize="9" fontWeight="700" fontFamily={display}>
+        ألف مبروك
+      </text>
+      <text x="80" y="142" textAnchor="middle" fill="#5f5472" fontSize="7" fontFamily={display}>
+        نوّرت الدنيا يا
+      </text>
+      <Name y={176} size={26} fill="#24304a">
+        {names}
+      </Name>
+      <rect x="42" y="196" width="76" height="14" rx="7" fill="#2bb8b0" opacity="0.25" />
+      <text x="80" y="206" textAnchor="middle" fill="#0f7a74" fontSize="7" fontWeight="700" fontFamily={display}>
+        سبوع {names}
+      </text>
+      <rect x="34" y="222" width="92" height="20" rx="10" fill="none" stroke="#f08a24" strokeWidth="0.8" />
+      <text x="80" y="235" textAnchor="middle" fill="#24304a" fontSize="7.5" fontFamily={display}>
+        {date}
       </text>
     </g>
   );
@@ -707,8 +1402,18 @@ function panelColor(kind: OpeningKind) {
   if (kind === "watercolor" || kind === "bismillah" || kind === "classic" || kind === "ivory") return "#f3ece4";
   if (kind === "rosegate" || kind === "bab" || kind === "blush") return "#f3ece8";
   if (kind === "gate" || kind === "mashrabiya") return "#f3eee6";
-  if (kind === "gift") return "#fff1e4";
-  if (kind === "ringbox") return "#f6eee8";
+  if (kind === "gift") return "#ffe6d2";
+  if (kind === "rings") return "#e9d2bd";
+  if (kind === "envelope") return "#e8d7bf";
+  if (kind === "candles") return "#ffd9e8";
+  if (kind === "confetti") return "#fff3a8";
+  if (kind === "sieve") return "#bff7ea";
+  if (kind === "ringbox") return "#f1ddd3";
+  if (kind === "ribbon") return "#2e0b13";
+  if (kind === "balloons") return "#070605";
+  if (kind === "shamadan") return "#150b10";
+  if (kind === "olive") return "#e3e8dc";
+  if (kind === "lanterns") return "#161e33";
   return "#f6e7ea";
 }
 
@@ -726,7 +1431,17 @@ function paperColor(kind: OpeningKind, face: Face) {
   if (kind === "bab") return "#f7f3ec";
   if (kind === "blush") return "#fffaf6";
   if (kind === "gate") return "#f7f4ef";
-  if (kind === "gift") return "#fff7f2";
-  if (kind === "ringbox") return "#fff9f6";
+  if (kind === "gift") return face === "a" ? "#ffe6d2" : "#fff4ea";
+  if (kind === "rings") return face === "a" ? "#efdcc9" : "#f6ede2";
+  if (kind === "envelope") return face === "a" ? "#efe2cf" : "#f7f1e7";
+  if (kind === "candles") return face === "a" ? "#ffe0ee" : "#fff1f7";
+  if (kind === "confetti") return face === "a" ? "#fff3a8" : "#fff8d4";
+  if (kind === "sieve") return face === "a" ? "#c8fbee" : "#eafff8";
+  if (kind === "ringbox") return face === "a" ? "#f1ddd3" : "#f8efe9";
+  if (kind === "ribbon") return face === "a" ? "#3d1019" : "#fbf4ee";
+  if (kind === "balloons") return "#0f0d0b";
+  if (kind === "shamadan") return face === "a" ? "#21121a" : "#f8f0e3";
+  if (kind === "olive") return face === "a" ? "#dbe5d0" : "#f3f5ef";
+  if (kind === "lanterns") return face === "a" ? "#1d2640" : "#fff6ea";
   return face === "a" ? "#f8ecee" : "#fff8f6";
 }
